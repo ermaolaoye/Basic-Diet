@@ -8,11 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		D2053310251F35A500FEA13B /* Basic_DietApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205330F251F35A500FEA13B /* Basic_DietApp.swift */; };
-		D2053312251F35A500FEA13B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2053311251F35A500FEA13B /* ContentView.swift */; };
+		D2053312251F35A500FEA13B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2053311251F35A500FEA13B /* MainView.swift */; };
 		D2053314251F35A700FEA13B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2053313251F35A700FEA13B /* Assets.xcassets */; };
 		D2053317251F35A700FEA13B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2053316251F35A700FEA13B /* Preview Assets.xcassets */; };
 		D2053322251F35A700FEA13B /* Basic_DietTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2053321251F35A700FEA13B /* Basic_DietTests.swift */; };
 		D205332D251F35A800FEA13B /* Basic_DietUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205332C251F35A800FEA13B /* Basic_DietUITests.swift */; };
+		D26AD8D2251F4C4F00F7D54F /* FoodDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8D1251F4C4F00F7D54F /* FoodDescription.swift */; };
+		D26AD8D4251F4D8000F7D54F /* FoodProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8D3251F4D8000F7D54F /* FoodProfile.swift */; };
+		D26AD8D7251F5B3F00F7D54F /* foods.json in Resources */ = {isa = PBXBuildFile; fileRef = D26AD8D6251F5B3F00F7D54F /* foods.json */; };
+		D26AD8DB251F5D8900F7D54F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8DA251F5D8900F7D54F /* Data.swift */; };
+		D26AD8DD251F603100F7D54F /* FoodList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8DC251F603100F7D54F /* FoodList.swift */; };
+		D26AD8DF251F60D100F7D54F /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8DE251F60D100F7D54F /* FoodRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +41,7 @@
 /* Begin PBXFileReference section */
 		D205330C251F35A500FEA13B /* Basic Diet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Basic Diet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D205330F251F35A500FEA13B /* Basic_DietApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic_DietApp.swift; sourceTree = "<group>"; };
-		D2053311251F35A500FEA13B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D2053311251F35A500FEA13B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D2053313251F35A700FEA13B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2053316251F35A700FEA13B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D2053318251F35A700FEA13B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +51,12 @@
 		D2053328251F35A700FEA13B /* Basic DietUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Basic DietUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D205332C251F35A800FEA13B /* Basic_DietUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic_DietUITests.swift; sourceTree = "<group>"; };
 		D205332E251F35A800FEA13B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D26AD8D1251F4C4F00F7D54F /* FoodDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDescription.swift; sourceTree = "<group>"; };
+		D26AD8D3251F4D8000F7D54F /* FoodProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodProfile.swift; sourceTree = "<group>"; };
+		D26AD8D6251F5B3F00F7D54F /* foods.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = foods.json; sourceTree = "<group>"; };
+		D26AD8DA251F5D8900F7D54F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		D26AD8DC251F603100F7D54F /* FoodList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodList.swift; sourceTree = "<group>"; };
+		D26AD8DE251F60D100F7D54F /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +107,13 @@
 		D205330E251F35A500FEA13B /* Basic Diet */ = {
 			isa = PBXGroup;
 			children = (
+				D26AD8D5251F5A5500F7D54F /* Models */,
 				D205330F251F35A500FEA13B /* Basic_DietApp.swift */,
-				D2053311251F35A500FEA13B /* ContentView.swift */,
+				D26AD8DE251F60D100F7D54F /* FoodRow.swift */,
+				D26AD8DC251F603100F7D54F /* FoodList.swift */,
+				D26AD8D1251F4C4F00F7D54F /* FoodDescription.swift */,
+				D2053311251F35A500FEA13B /* MainView.swift */,
+				D26AD8D9251F5D7300F7D54F /* Resources */,
 				D2053313251F35A700FEA13B /* Assets.xcassets */,
 				D2053318251F35A700FEA13B /* Info.plist */,
 				D2053315251F35A700FEA13B /* Preview Content */,
@@ -128,6 +145,23 @@
 				D205332E251F35A800FEA13B /* Info.plist */,
 			);
 			path = "Basic DietUITests";
+			sourceTree = "<group>";
+		};
+		D26AD8D5251F5A5500F7D54F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D26AD8D3251F4D8000F7D54F /* FoodProfile.swift */,
+				D26AD8DA251F5D8900F7D54F /* Data.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D26AD8D9251F5D7300F7D54F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D26AD8D6251F5B3F00F7D54F /* foods.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26AD8D7251F5B3F00F7D54F /* foods.json in Resources */,
 				D2053317251F35A700FEA13B /* Preview Assets.xcassets in Resources */,
 				D2053314251F35A700FEA13B /* Assets.xcassets in Resources */,
 			);
@@ -259,7 +294,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2053312251F35A500FEA13B /* ContentView.swift in Sources */,
+				D26AD8D2251F4C4F00F7D54F /* FoodDescription.swift in Sources */,
+				D26AD8DB251F5D8900F7D54F /* Data.swift in Sources */,
+				D26AD8D4251F4D8000F7D54F /* FoodProfile.swift in Sources */,
+				D26AD8DD251F603100F7D54F /* FoodList.swift in Sources */,
+				D26AD8DF251F60D100F7D54F /* FoodRow.swift in Sources */,
+				D2053312251F35A500FEA13B /* MainView.swift in Sources */,
 				D2053310251F35A500FEA13B /* Basic_DietApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
