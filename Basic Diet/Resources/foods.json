@@ -1,0 +1,36 @@
+[
+    {
+    "name": "Original Recipe Chicken",
+    "producer": "KFC",
+    "calories": 390,
+    "protein": 39.0,
+    "fat": 21.0,
+    "carbonHydrate": 0.0,
+    "calcium": 0.0,
+    "iron": 0.0,
+    "phosphorus": 0.0
+    },
+    {
+    "name": "Big Mac",
+    "producer": "McDonald",
+    "calories": 550,
+    "protein": 39.0,
+    "fat": 30,
+    "carbonHydrate": 45,
+    "calcium": 3,
+    "iron": 7,
+    "phosphorus": 0.0
+    },
+    {
+    "name": "Chicken Avocado",
+    "producer": "Pret",
+    "calories": 485,
+    "protein": 24.5,
+    "fat": 22.3,
+    "carbonHydrate": 41.6,
+    "calcium": 0.0,
+    "iron": 0.0,
+    "phosphorus": 0.0
+    }
+
+]
