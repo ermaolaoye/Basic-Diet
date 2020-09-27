@@ -1,5 +1,6 @@
 [
     {
+    "id": 1,
     "name": "Original Recipe Chicken",
     "producer": "KFC",
     "calories": 390,
@@ -8,9 +9,10 @@
     "carbonHydrate": 0.0,
     "calcium": 0.0,
     "iron": 0.0,
-    "phosphorus": 0.0
+    "phosphrous": 0.0
     },
     {
+    "id": 2,
     "name": "Big Mac",
     "producer": "McDonald",
     "calories": 550,
@@ -19,9 +21,10 @@
     "carbonHydrate": 45,
     "calcium": 3,
     "iron": 7,
-    "phosphorus": 0.0
+    "phosphrous": 0.0
     },
     {
+    "id": 3,
     "name": "Chicken Avocado",
     "producer": "Pret",
     "calories": 485,
@@ -30,7 +33,7 @@
     "carbonHydrate": 41.6,
     "calcium": 0.0,
     "iron": 0.0,
-    "phosphorus": 0.0
+    "phosphrous": 0.0
     }
 
 ]

@@ -11,9 +11,15 @@ struct FoodRow: View {
     var food: FoodProfile
         
     var body: some View {
-        HStack{
+        HStack {
             Text(food.name)
-        }
+            
+            Spacer()
+            
+            Text(String(food.calories))
+        
+            
+        }.padding()
     }
 }
 

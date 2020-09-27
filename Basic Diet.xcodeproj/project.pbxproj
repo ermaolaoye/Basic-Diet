@@ -17,8 +17,9 @@
 		D26AD8D4251F4D8000F7D54F /* FoodProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8D3251F4D8000F7D54F /* FoodProfile.swift */; };
 		D26AD8D7251F5B3F00F7D54F /* foods.json in Resources */ = {isa = PBXBuildFile; fileRef = D26AD8D6251F5B3F00F7D54F /* foods.json */; };
 		D26AD8DB251F5D8900F7D54F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8DA251F5D8900F7D54F /* Data.swift */; };
-		D26AD8DD251F603100F7D54F /* FoodList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8DC251F603100F7D54F /* FoodList.swift */; };
 		D26AD8DF251F60D100F7D54F /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8DE251F60D100F7D54F /* FoodRow.swift */; };
+		D26AD8E1251F632800F7D54F /* FoodList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8E0251F632800F7D54F /* FoodList.swift */; };
+		D26AD8E3251F707200F7D54F /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AD8E2251F707200F7D54F /* UserProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +56,9 @@
 		D26AD8D3251F4D8000F7D54F /* FoodProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodProfile.swift; sourceTree = "<group>"; };
 		D26AD8D6251F5B3F00F7D54F /* foods.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = foods.json; sourceTree = "<group>"; };
 		D26AD8DA251F5D8900F7D54F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		D26AD8DC251F603100F7D54F /* FoodList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodList.swift; sourceTree = "<group>"; };
 		D26AD8DE251F60D100F7D54F /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
+		D26AD8E0251F632800F7D54F /* FoodList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodList.swift; sourceTree = "<group>"; };
+		D26AD8E2251F707200F7D54F /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +112,8 @@
 				D26AD8D5251F5A5500F7D54F /* Models */,
 				D205330F251F35A500FEA13B /* Basic_DietApp.swift */,
 				D26AD8DE251F60D100F7D54F /* FoodRow.swift */,
-				D26AD8DC251F603100F7D54F /* FoodList.swift */,
 				D26AD8D1251F4C4F00F7D54F /* FoodDescription.swift */,
+				D26AD8E0251F632800F7D54F /* FoodList.swift */,
 				D2053311251F35A500FEA13B /* MainView.swift */,
 				D26AD8D9251F5D7300F7D54F /* Resources */,
 				D2053313251F35A700FEA13B /* Assets.xcassets */,
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				D26AD8D3251F4D8000F7D54F /* FoodProfile.swift */,
+				D26AD8E2251F707200F7D54F /* UserProfile.swift */,
 				D26AD8DA251F5D8900F7D54F /* Data.swift */,
 			);
 			path = Models;
@@ -295,9 +298,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D26AD8D2251F4C4F00F7D54F /* FoodDescription.swift in Sources */,
+				D26AD8E1251F632800F7D54F /* FoodList.swift in Sources */,
 				D26AD8DB251F5D8900F7D54F /* Data.swift in Sources */,
 				D26AD8D4251F4D8000F7D54F /* FoodProfile.swift in Sources */,
-				D26AD8DD251F603100F7D54F /* FoodList.swift in Sources */,
+				D26AD8E3251F707200F7D54F /* UserProfile.swift in Sources */,
 				D26AD8DF251F60D100F7D54F /* FoodRow.swift in Sources */,
 				D2053312251F35A500FEA13B /* MainView.swift in Sources */,
 				D2053310251F35A500FEA13B /* Basic_DietApp.swift in Sources */,
