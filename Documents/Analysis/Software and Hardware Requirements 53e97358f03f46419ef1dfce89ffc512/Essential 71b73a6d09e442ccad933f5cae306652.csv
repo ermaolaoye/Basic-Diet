@@ -1,0 +1,13 @@
+﻿Criteria,How to evidence
+Main menu provides basic visualised information about user's health data.,"Screen shot of the main menu that shows a calories counter, nutrition counter. The counter needs to be shown by graphs and charts with numbers."
+User can click the basic health data in the main menu to check more detailed information in the sub menu.,Screen shot of the sub menu that shows a visualized statistic data with colors and description.
+A history menu which provides user's diet history in a calender view.,Screen shots of the history menu that user can access to every of their eating history.
+"Users can add record of their food, and the record will effect all the nutrition data in the main menu.",Video about user interactions. The information shown in the main menu must response user's interaction.
+A search menu that user can choose the food they had eat.,"Screen shots of the search menu, that provides different way of sorting list of foods."
+A detailed view of the food where user can enter through the search menu that shows detailed information about the food's nutrition.,Screen shots of the food detailed view. The nutrition information needs to be shown in graphs and charts with numbers and colors.
+A barcode scanner that can lead users directly to the detailed view of the food they had scanned.,Video about user interactions. The detailed view that barcode scanner leads to must be correct.
+A pop-up window that will recommend user with selection of healthy meals that they might like depends on what they had taken in before.,User consumption history document and the screen shots about the food that algorithm had recommend them. Do calculation to check whether the meal is healthy to user or not.
+A nutrition calculator which user can input raw materials of the meal and get estimated nutrition information of the meal,"Screenshots of user input and screenshot of calculator output, with the real information from professional food database. Check if the result is 80% accurate."
+A voulme estimater that uses the phone-s camera to estimate the volume of container,Video about user interactions. The volume estimated needs to be 90% accurate compares to the real one.
+A ranking view of users and their friends,Screenshots of the ranking view. Ranking needs to be accurate and orderd.
+A synchronised data connection between apple's Health app,"Screenshots of the apple's Health app's data, and the data in my app. The data needs to be synchronised."
