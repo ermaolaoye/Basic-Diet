@@ -1,1 +1,33 @@
-<mxfile host="app.diagrams.net" modified="2020-11-06T15:29:10.335Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Safari/605.1.15" version="13.8.8" etag="r5_FMr7cndwUZ8N0VCZS" type="github"><diagram id="NSNul17yzTbw2-TGJspu">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2020-11-06T15:32:39.418Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Safari/605.1.15" etag="Z1Jy2Z9WKeSV2XN8T5Jz" version="13.8.8" type="github">
+  <diagram id="NSNul17yzTbw2-TGJspu" name="Page-1">
+    <mxGraphModel dx="678" dy="399" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="dLC3T5EqGM4w5gxeqcs6-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="dLC3T5EqGM4w5gxeqcs6-1" target="dLC3T5EqGM4w5gxeqcs6-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dLC3T5EqGM4w5gxeqcs6-1" value="Start" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="110" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dLC3T5EqGM4w5gxeqcs6-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="dLC3T5EqGM4w5gxeqcs6-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="310" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dLC3T5EqGM4w5gxeqcs6-2" value="Get Json file by web server API" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="212.5" y="170" width="195" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dLC3T5EqGM4w5gxeqcs6-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="dLC3T5EqGM4w5gxeqcs6-5" target="dLC3T5EqGM4w5gxeqcs6-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dLC3T5EqGM4w5gxeqcs6-5" value="Decode Json" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="240" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dLC3T5EqGM4w5gxeqcs6-6" value="Fetch data to the model" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="240" y="310" width="140" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
