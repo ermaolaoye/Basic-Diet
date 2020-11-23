@@ -1,5 +1,7 @@
 # Design
 
+[TOC]
+
 The design of the whole app has being split to two part:
 
 - The Client Side
