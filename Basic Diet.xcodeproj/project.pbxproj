@@ -52,6 +52,7 @@
 		D2053328251F35A700FEA13B /* Basic DietUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Basic DietUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D205332C251F35A800FEA13B /* Basic_DietUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic_DietUITests.swift; sourceTree = "<group>"; };
 		D205332E251F35A800FEA13B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2651FBF25692814005F125F /* HTTPRequestDemo.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = HTTPRequestDemo.playground; path = ../../../../../HTTPRequestDemo.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D26AD8D1251F4C4F00F7D54F /* FoodDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDescription.swift; sourceTree = "<group>"; };
 		D26AD8D3251F4D8000F7D54F /* FoodProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodProfile.swift; sourceTree = "<group>"; };
 		D26AD8D6251F5B3F00F7D54F /* foods.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = foods.json; sourceTree = "<group>"; };
@@ -59,6 +60,7 @@
 		D26AD8DE251F60D100F7D54F /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
 		D26AD8E0251F632800F7D54F /* FoodList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodList.swift; sourceTree = "<group>"; };
 		D26AD8E2251F707200F7D54F /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		D2DB4FF22563630B004588AE /* HashAlgorithm.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HashAlgorithm.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		D205330E251F35A500FEA13B /* Basic Diet */ = {
 			isa = PBXGroup;
 			children = (
+				D2DB4FF125636302004588AE /* Playground */,
 				D26AD8D5251F5A5500F7D54F /* Models */,
 				D205330F251F35A500FEA13B /* Basic_DietApp.swift */,
 				D26AD8DE251F60D100F7D54F /* FoodRow.swift */,
@@ -165,6 +168,15 @@
 				D26AD8D6251F5B3F00F7D54F /* foods.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D2DB4FF125636302004588AE /* Playground */ = {
+			isa = PBXGroup;
+			children = (
+				D2651FBF25692814005F125F /* HTTPRequestDemo.playground */,
+				D2DB4FF22563630B004588AE /* HashAlgorithm.playground */,
+			);
+			path = Playground;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
