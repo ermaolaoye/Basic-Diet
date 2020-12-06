@@ -8,7 +8,7 @@ def get_db():
             detect_types=sqlite3.PARSE_DECLTYPES
         )
         g.db.row_factory = sqlite3.Row # this tells the connection to return rows behave like dicts. Allows accesssing the columns by name
-    
+        g.cursor = g.db.cursor()
     return g.db
 
 def close_db(e=None): # This function is ressponsible for closing the connection when the request is done.
@@ -17,8 +17,6 @@ def close_db(e=None): # This function is ressponsible for closing the connection
     if db is not None:
         db.close()
 
-def init_db():
-    db = get_db()
 
 def init_app(app):
     app.teardown_appcontext(close_db) # This tells the application to close the connection after returning the response
