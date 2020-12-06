@@ -1,6 +1,6 @@
-from flask import Blueprint, g
-from . import food_api
+from flask import Blueprint, request
 from .db import get_db
+from .jwt import get_userJWT
 import json
 
 class NestedBlueprint(object): # Object for creating nested blueprint
@@ -19,10 +19,17 @@ user = NestedBlueprint(bp, 'User') # APIs about users
 record = NestedBlueprint(bp, 'Record') # Apis about records
 
 def query2Json(sql, para):
+    """
+    Parameters:
+    sql         The sql statement
+    para        The parameter for the sql statement
+    """
     db = get_db()
     cursor = db.execute(sql % para)
     dictData = [dict(row) for row in cursor.fetchall()]
     return json.dumps(dictData)
+
+# - Foods
 
 @food.route('/description/<int:food_id>', methods=('GET', 'POST'))
 def get_food_description(food_id=1):
@@ -36,7 +43,7 @@ def get_food_description(food_id=1):
     json = query2Json(sql=sql, para=para)
     return json
 
-@food.route('/list/<string:user_input>')
+@food.route('/list/<string:user_input>', methods=('GET','POST'))
 def get_list_food(user_input):
     """
     Parameter:
@@ -47,3 +54,9 @@ def get_list_food(user_input):
     json = query2Json(sql=sql, para=para)
     return json
 
+# - Users
+@user.route('/addUser', methods=('GET','POST'))
+def user_register():
+    if request.method == 'POST':
+        data = request.get_json()
+        data_j = json.loads(data)
