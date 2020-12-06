@@ -156,3 +156,5 @@ def get_food_description(food_id=1):
     data = db.execute('SELECT foodNameCHN, calories, carbohydrate, fat, protein, cholesterol FROM Foods WHERE foodID = %i' % food_id)
     return '.'
 ```
+
+NOT FINISHED
