@@ -16,7 +16,7 @@ class NestedBlueprint(object): # Object for creating nested blueprint
 bp = Blueprint('api', __name__, url_prefix='/api') # Setting up for the api blueprint
 food = NestedBlueprint(bp, 'Food') # APIs about foods
 user = NestedBlueprint(bp, 'User') # APIs about users
-record = NestedBlueprint(bp, 'Record') # Apis about records
+record = NestedBlueprint(bp, 'Record') # APIs about records
 
 def query2Json(sql, para):
     """

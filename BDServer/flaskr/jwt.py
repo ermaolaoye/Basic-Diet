@@ -1,6 +1,7 @@
 import json
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 import hmac
+import time
 
 def b64encode(s: bytes) -> str: # Base64 encoding
     s_bin = urlsafe_b64encode(s)
@@ -25,3 +26,8 @@ def JWTgenerator(payload, header=default_header):
     signature_b64 = b64encode(signature)
     jwt = message + "." + signature_b64
     return jwt
+
+def get_userJWT(userID):
+    payload = {"userID":str(userID),"iat":str(time.time())}
+    userJWT = JWTgenerator(payload)
+    return userJWT
