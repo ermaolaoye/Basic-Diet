@@ -66,6 +66,21 @@ def user_register():
     """
     if request.method == 'POST':
         user = request.json
-        sql = '''INSERT INTO Users(userName, userEmail, userWeight, userPassword, userBirthday) VALUES(%s, %s, %i, %s, %s)''' % (user.userName, user.userEmail, user.userWeight, user.password, user.userBirthday)
-       
-    return "success"
+        # Insert the user information to database
+        sql = '''INSERT INTO Users(userName, userEmail, userWeight, userHeight, userPassword, userBirthday) VALUES(\"%s\", \"%s\", %i, %i,\"%s\", \"%s\")''' % (user['userName'], user['userEmail'], user['userWeight'], user['userHeight'],user['password'], user['userBirthday'])
+        db = get_db()
+        db.execute(sql)
+        db.commit()
+        # Get user id from database
+        cursor = db.execute("SELECT userID FROM Users WHERE userName==\"%s\"" % user['userName'])
+        dictData = [row[0] for row in cursor.fetchall()]
+        # Get the corresponding JWT for user
+        JWT = get_userJWT(int(dictData[0]))
+        db.commit()
+        db.execute('''UPDATE Users SET JWT=\"%s\" WHERE userName=\"%s\"''' % (JWT, user['userName']))
+        db.commit()
+        # Return JWT
+        return JWT
+
+# - Records
+@record.route('addRecord', methods=('GET','POST'))

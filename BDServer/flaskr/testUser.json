@@ -1,7 +1,8 @@
 {
-  "userName": "TestUser",
+  "userName": "Ermaolaoye",
   "password": "",
   "userEmail": "test@gmail.com",
-  "userWeight": "90",
-  "userAge": 19
+  "userWeight": 90,
+  "userHeight": 173,
+  "userBirthday": "2000-04-01"
 }
