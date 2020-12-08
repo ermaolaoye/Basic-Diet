@@ -1,5 +1,5 @@
 from datetime import datetime
-def getUserRecCalories(weight, height, age, gender) -> int:
+def getUserRecCalories(weight, height, age, gender):
     """
     Parameter:
     weight  A integer value of user's weight

@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from .db import get_db
 from .jwt import get_userJWT
+from .util import getUserRecCalories, getUserAge
 import json
 
 class NestedBlueprint(object): # Object for creating nested blueprint
@@ -59,6 +60,7 @@ def user_register():
     """
     JSON Requirement
     userName    A string value that contains user name
+    userGender  A string value that tells user gender
     password    A string value that contains SHA2 hashed value of password
     userEmail   A string value that contains user email
     userWeight  A integer value of the user's weight
@@ -66,8 +68,9 @@ def user_register():
     """
     if request.method == 'POST':
         user = request.json
+        # <++> INPUT CHECK, IF NOT IN FORMAT THEN ABORT ERROR
         # Insert the user information to database
-        sql = '''INSERT INTO Users(userName, userEmail, userWeight, userHeight, userPassword, userBirthday) VALUES(\"%s\", \"%s\", %i, %i,\"%s\", \"%s\")''' % (user['userName'], user['userEmail'], user['userWeight'], user['userHeight'],user['password'], user['userBirthday'])
+        sql = '''INSERT INTO Users(userName, userGender, userEmail, userWeight, userHeight, userPassword, userBirthday) VALUES(\"%s\", \"%s\", \"%s\", %i, %i,\"%s\", \"%s\")''' % (user['userName'], user['userGender'], user['userEmail'], user['userWeight'], user['userHeight'],user['password'], user['userBirthday'])
         db = get_db()
         db.execute(sql)
         db.commit()
@@ -76,11 +79,16 @@ def user_register():
         dictData = [row[0] for row in cursor.fetchall()]
         # Get the corresponding JWT for user
         JWT = get_userJWT(int(dictData[0]))
+        # Get user recommend calories
+        recCalories = getUserRecCalories(int(user['userWeight']),int(user['userHeight']),int(getUserAge(user['userBirthday'])),user['userGender'])
+        # Update to database
         db.commit()
-        db.execute('''UPDATE Users SET JWT=\"%s\" WHERE userName=\"%s\"''' % (JWT, user['userName']))
+        db.execute('''UPDATE Users SET JWT=\"%s\", userCalories=%i WHERE userName=\"%s\"''' % (JWT, recCalories, user['userName']))
         db.commit()
         # Return JWT
         return JWT
 
 # - Records
 @record.route('addRecord', methods=('GET','POST'))
+def test():
+    return "hello"
