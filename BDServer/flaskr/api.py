@@ -30,7 +30,6 @@ def query2Json(sql, para):
     return json.dumps(dictData)
 
 # - Foods
-
 @food.route('/description/<int:food_id>', methods=('GET', 'POST'))
 def get_food_description(food_id=1):
     """
@@ -57,6 +56,16 @@ def get_list_food(user_input):
 # - Users
 @user.route('/addUser', methods=('GET','POST'))
 def user_register():
+    """
+    JSON Requirement
+    userName    A string value that contains user name
+    password    A string value that contains SHA2 hashed value of password
+    userEmail   A string value that contains user email
+    userWeight  A integer value of the user's weight
+    userBirthdayA string value of user's birthday
+    """
     if request.method == 'POST':
-        data = request.get_json()
-        data_j = json.loads(data)
+        user = request.json
+        sql = '''INSERT INTO Users(userName, userEmail, userWeight, userPassword, userBirthday) VALUES(%s, %s, %i, %s, %s)''' % (user.userName, user.userEmail, user.userWeight, user.password, user.userBirthday)
+       
+    return "success"
