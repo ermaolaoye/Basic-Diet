@@ -1,9 +1,8 @@
 {
-  "userName": "Ermaolaoye",
+  "userName": "testUser",
   "userGender": "Male",
-  "password": "",
+  "password": "random-hash-value",
   "userEmail": "test@gmail.com",
-  "userWeight": 93,
   "userHeight": 183,
   "userBirthday": "2003-04-01"
 }

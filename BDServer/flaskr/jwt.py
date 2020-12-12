@@ -13,21 +13,36 @@ def b64decode(s: str) -> bytes: # Base64 decoding
     s_bin += b'=' * (4 - len(s_bin) % 4)
     return urlsafe_b64decode(s_bin)
 
+# Secret for encrypting
 _secret = b"el-psy-kongroo"
 
 default_header = {"typ":"JWT","alg":"HS256"} # default header
 
 def JWTgenerator(payload, header=default_header):
     global _secret
+    # Header and Payload base 64 encode
     header_b64 = b64encode(json.dumps(header, separators=(',',":")).encode('ascii'))
     payload_b64 = b64encode(json.dumps(payload, separators=(",",":")).encode('utf-8'))
+    # Creating signature
     message = header_b64 + "." + payload_b64
     signature = hmac.new(_secret, message.encode('ascii'), digestmod='sha256').digest()
     signature_b64 = b64encode(signature)
+    # Combining three parts to create the final JWT
     jwt = message + "." + signature_b64
     return jwt
 
 def get_userJWT(userID):
+    """
+    Parameter:
+    userID      The userID used to generate JWT
+
+    JWT Payload form:
+    userID:     id
+    iat:        unix timestamp form time
+
+    """
     payload = {"userID":str(userID),"iat":str(time.time())}
     userJWT = JWTgenerator(payload)
     return userJWT
+
+print(get_userJWT(userID=1))

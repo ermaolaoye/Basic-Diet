@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 def getUserRecCalories(weight, height, age, gender) -> int:
     """
     Parameter:
@@ -24,4 +25,18 @@ def getUserAge(birthdate):
     userBirthdate = datetime.strptime(birthdate,'%Y-%m-%d')
     currentDate = datetime.now()
     age = int((currentDate - userBirthdate).days / 365)
-    return age 
+    return age
+
+def validateInput(regExp, inputValue):
+    """
+    Parameter:
+    regExp      The regular expression for validating inputValue
+    inputValue  The string wating to be validated
+    """
+    validateValue = re.findall(regExp, inputValue)
+    if validateInput == validateValue:
+        return True
+    else:
+        return False
+
+print(validateInput("",""))

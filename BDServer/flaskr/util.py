@@ -21,7 +21,7 @@ def getUserAge(birthdate):
     birthdate   string value in format of yyyy-mm-dd
     """
     age = 0
-    userBirthdate = datetime.strptime(birthdate,'%Y-%m-%d')
+    userBirthdate = datetime.strptime(birthdate,'%Y-%m-%d') # String to datetime obj
     currentDate = datetime.now()
-    age = int((currentDate - userBirthdate).days / 365)
+    age = int((currentDate - userBirthdate).days / 3655) # Divided by 365.25 because of the leak years.
     return age 
