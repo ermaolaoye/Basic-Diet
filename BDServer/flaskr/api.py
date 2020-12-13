@@ -166,6 +166,52 @@ def get_user_description():
         para = int(user['userID'])
         json = query2Json(sql=sql, para=para, abort400=False)
         return json
+
+@user.route('/update', methods=('GET','POST'))
+def update_user_profile():
+    """
+    JSON Requirement
+    userJWT     JWT stored in the frontend
+    userID      The ID of the user
+    userName    New name of the user
+    userGender  New gender of the user
+    userEmail   New email of the user
+    """
+    if request.method == 'POST':
+        user = request.json
+        # JWT Verification
+        if not JWTverification(JWT=user['userJWT'], userID=user['userID']):
+            abort(401)
+        # Update User Profile
+        sql = '''UPDATE Users SET userName=\"%s\", userGender = \"%s\", userEmail=\"%s\" WHERE userID=%i''' % (user['userName'], user['userGender'], user['userEmail'], user['userID'])
+        db = get_db()
+        db.execute(sql)
+        db.commit()
+        return "Succeed"
+
+@user.route('/updatePassword', methods=('GET','POST'))
+def update_user_password():
+    """
+    JSON Requirement
+    oriPassword Original Password stored in the database
+    newPassword New Password that user want to set
+    userID      The ID of the user
+    """
+    if request.method == 'POST':
+        user = request.json
+        # GET server password
+        db = get_db()
+        cursor = db.execute("SELECT userPassword FROM Users WHERE userID = %i" % user['userID'])
+        dictData = [row[0] for row in cursor.fetchall()]
+        db_userPassword = str(dictData[0])
+        # Password Verification
+        if db_userPassword != user['oriPassword']:
+            return "Incorrect Input"
+        db.commit()
+        db.execute('''UPDATE Users SET userPassword=\"%s\" WHERE userID=%i''' % (user['newPassword'], user['userID']))
+        db.commit()
+        return 'succeed'
+
 # - Records
 @record.route('/addRecord', methods=('GET','POST'))
 def record_register():
@@ -184,7 +230,7 @@ def record_register():
             abort(401)
         # Get current time
         currentTime = datetime.now()
-        str_currentTime = currentTime.strftime("%d/%m/%Y %H:%M:%S")
+        str_currentTime = currentTime.strftime("%d/%m/%Y %H:%M:%S") # Format current time into string
         # Insert the data into the database
         sql = '''INSERT INTO Records(userID, foodID, date, quantity, unit) VALUES(%i, %i, \"%s\", %f, \"%s\")''' % (record['userID'], record['foodID'], str_currentTime, record['quantity'], record['unit'])
         # Return Succeed
