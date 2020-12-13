@@ -99,7 +99,7 @@ def user_register():
     password    A string value that contains SHA2 hashed value of password
     userEmail   A string value that contains user email
     userWeight  A integer value of the user's weight
-    userBirthdayA string value of user's birthday
+    userBirthdayA string value of user's birthday in format yyyy-mm-dd
     """
     if request.method == 'POST':
         user = request.json
@@ -230,7 +230,7 @@ def record_register():
             abort(401)
         # Get current time
         currentTime = datetime.now()
-        str_currentTime = currentTime.strftime("%d/%m/%Y %H:%M:%S") # Format current time into string
+        str_currentTime = currentTime.strftime("%Y/%m/%d %H:%M:%S") # Format current time into string
         # Insert the data into the database
         sql = '''INSERT INTO Records(userID, foodID, date, quantity, unit) VALUES(%i, %i, \"%s\", %f, \"%s\")''' % (record['userID'], record['foodID'], str_currentTime, record['quantity'], record['unit'])
         # Return Succeed
@@ -239,3 +239,49 @@ def record_register():
         db.commit()
         # Return Succeed
         return 'succeed'
+
+@record.route('/description', methods=('GET','POST'))
+def get_record_description():
+    """
+    JSON Requirement
+    userID      ID of the user
+    userJWT     JWT of the user
+    rangeType   Type of range of records: Day, Week, Month, ID
+                    - Day: yyyy-mm-dd
+                    - Week: yyyy-mm-dd of the start(Monday) of the week
+                    - Month: yyyy-mm
+                    - ID: id of the record 
+    rangeVal    Value of the range
+    """
+    if request.method == 'POST':
+        record = request.json
+        # JWT Verification
+        if not JWTverification(JWT=record['userJWT'], userID=record['userID']):
+            abort(401)
+        # When requesting for one day's record or one month's record
+        if record['rangeType'] == 'Day' or record['rangeType'] == 'Month':
+            # Query the database
+            sql = """SELECT foodID, quantity, unit, date FROM Records WHERE date LIKE \"%s\""""
+            para = record['rangeVal'] + "%"
+            json = query2Json(sql=sql, para=para, abort400=True)
+            return json
+        # When requesting for one week's record
+        elif record['rangeType'] == 'Week':
+            # Week Start Date and Week End Date Calculation
+            startDate = record['rangeVal']
+            endDate = str(str(startDate[0:8]) + str(int(startDate[8:10])+6))
+            # Query the database
+            sql = """SELECT foodID, quantity, unit, date FROM Records WHERE date(date) BETWEEN date(\"%s\") AND date(\"%s\")"""
+            para = (startDate, endDate)
+            json = query2Json(sql=sql, para=para, abort400=True)
+            return json
+        elif record['rangeType'] == 'ID':
+            sql = """SELECT foodID, quantity, unit, date FROM Records WHERE recordID = %i"""
+            para = int(record['rangeVal'])
+            json = query2Json(sql=sql, para=para, abort400=True)
+            return json
+        else:
+            abort(400)
+
+
+
