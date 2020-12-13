@@ -44,5 +44,3 @@ def get_userJWT(userID):
     payload = {"userID":str(userID),"iat":str(time.time())}
     userJWT = JWTgenerator(payload)
     return userJWT
-
-print(get_userJWT(userID=1))

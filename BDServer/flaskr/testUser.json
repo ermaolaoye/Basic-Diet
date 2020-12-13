@@ -4,5 +4,6 @@
   "password": "random-hash-value",
   "userEmail": "test@gmail.com",
   "userHeight": 183,
+  "userWeight": 93,
   "userBirthday": "2003-04-01"
 }

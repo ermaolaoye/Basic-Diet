@@ -2,6 +2,7 @@ from flask import Blueprint, request, abort
 from .db import get_db
 from .jwt import get_userJWT
 from .util import getUserRecCalories, getUserAge
+from datetime import datetime
 import json
 
 class NestedBlueprint(object): # Object for creating nested blueprint
@@ -41,10 +42,28 @@ def getUserID(para):
                 Parameter needs to contain \" when utilizing string data
     """
     db = get_db()
-    cursor = db.execute("SELECT userID FROM Users WHERE " % para)
+    cursor = db.execute("SELECT userID FROM Users WHERE %s" % para)
     dictData = [row[0] for row in cursor.fetchall()]
     userID = int(dictData[0])
     return userID
+
+def JWTverification(JWT, userID):
+    """
+    Parameters:
+    JWT         JWT input from the frontend
+    userID      ID of the user for verificating its JWT
+    """
+    # Find the JWT stored in the server corresponding with the input
+    sql = '''SELECT JWT FROM Users WHERE userID=%i''' % userID
+    db = get_db()
+    cursor = db.execute(sql)
+    dictData = [row[0] for row in cursor.fetchall()]
+    db_JWT = str(dictData[0])
+    # Equal to frontend input then return True
+    if db_JWT == JWT:
+        return True
+    else:
+        return False
 
 # - Foods
 @food.route('/description/<int:food_id>', methods=('GET', 'POST'))
@@ -89,21 +108,19 @@ def user_register():
         db = get_db()
         db.execute(sql)
         db.commit()
-        # Get user id from database
-        cursor = db.execute("SELECT userID FROM Users WHERE userName==\"%s\"" % user['userName'])
-        dictData = [row[0] for row in cursor.fetchall()]
         # Get the corresponding JWT for user
-        JWT = get_userJWT(int(dictData[0]))
+        para = "userEmail == \"%s\"" % user['userEmail']
+        JWT = get_userJWT(getUserID(para = para))
         # Get user recommend calories
         recCalories = getUserRecCalories(int(user['userWeight']),int(user['userHeight']),int(getUserAge(user['userBirthday'])),user['userGender'])
         # Update calories and jwt to database
         db.commit()
-        db.execute('''UPDATE Users SET JWT=\"%s\", userCalories=%i WHERE userName=\"%s\"''' % (JWT, recCalories, user['userName']))
+        db.execute('''UPDATE Users SET JWT=\"%s\", userCalories=%i WHERE userEmail=\"%s\"''' % (JWT, recCalories, user['userEmail']))
         db.commit()
         # Return JWT
         return JWT
 
-@user.route('/login', method=('GET','POST'))
+@user.route('/login', methods=('GET','POST'))
 def user_login():
     """
     JSON Requirement
@@ -112,17 +129,67 @@ def user_login():
     """
     if request.method == 'POST':
         user = request.json
+        # GET the password's hashed value that stored in the database
         sql = '''SELECT userPassword FROM Users WHERE userEmail=\"%s\"''' % (user['userEmail'])
         db = get_db()
         cursor = db.execute(sql)
         dictData = [row[0] for row in cursor.fetchall()]
-        db_userPassword = dictData[0]
-        input_userPassword = user['password']
-        return "Test"
+        db_userPassword = str(dictData[0])
+        input_userPassword = str(user['password'])
+        # When input password is the same as the password stored in the database
+        if db_userPassword == input_userPassword:
+            # Get corresponding userID and update user's JWT
+            para = "userEmail == \"%s\"" % user['userEmail']
+            JWT = get_userJWT(getUserID(para = para))
+            db.commit()
+            db.execute('''UPDATE Users SET JWT=\"%s\" WHERE userEmail=\"%s\"''' % (JWT, user['userEmail']))
+            db.commit()
+            # Return the new JWT
+            return JWT 
+        # Return error message when input is incorrect
+        else:
+            return "WrongInput"
 
-
-
+@user.route('/description', methods=('GET','POST'))
+def get_user_description():
+    """
+    JSON Requirement
+    userJWT     JWT stored in the frontend
+    userID      The ID of the user
+    """
+    if request.method == 'POST':
+        user = request.json
+        # JWT Verification
+        if not JWTverification(JWT = str(user['userJWT']), userID = int(user['userID'])):
+            abort(401)
+        sql = '''SELECT userName, userEmail ,userWeight ,userHeight ,userCalories ,userBirthday ,userGender FROM Users WHERE userID = %i'''
+        para = int(user['userID'])
+        json = query2Json(sql=sql, para=para, abort400=False)
+        return json
 # - Records
-@record.route('addRecord', methods=('GET','POST'))
-def test():
-     return "hello"
+@record.route('/addRecord', methods=('GET','POST'))
+def record_register():
+    """
+    JSON Requirement
+    userID      ID of the user
+    userJWT     JWT stored in the frontend
+    foodID      ID of the food
+    quantity    Quantity of consumption
+    unit        string value of unit
+    """
+    if request.method == 'POST':
+        record = request.json
+        # JWT Verification
+        if not JWTverification(JWT=str(record['userJWT']), userID=int(record['userID'])):
+            abort(401)
+        # Get current time
+        currentTime = datetime.now()
+        str_currentTime = currentTime.strftime("%d/%m/%Y %H:%M:%S")
+        # Insert the data into the database
+        sql = '''INSERT INTO Records(userID, foodID, date, quantity, unit) VALUES(%i, %i, \"%s\", %f, \"%s\")''' % (record['userID'], record['foodID'], str_currentTime, record['quantity'], record['unit'])
+        # Return Succeed
+        db = get_db()
+        db.execute(sql)
+        db.commit()
+        # Return Succeed
+        return 'succeed'
