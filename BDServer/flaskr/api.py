@@ -69,6 +69,16 @@ def JWTverification(JWT, userID):
         return True
     else:
         return False
+def getUserAuthority(userID) -> str:
+    """
+    Parameters:
+    userID      ID of the user
+    """
+    sql = '''SELECT userAuthority FROM Users WHERE userID = %i''' % userID
+    db = get_db()
+    cursor = db.execute(sql)
+    dictData = [row[0] for row in cursor.fetchall()]
+    return str(dictData[0])
 
 # - Foods
 @food.route('/description/<int:food_id>', methods=('GET', 'POST'))
@@ -93,6 +103,95 @@ def get_list_food(user_input):
     para = "%" + user_input + "%"
     json = query2Json(sql=sql, para=para, abort400=True)
     return json
+
+@food.route('/add', methods=('GET','POST'))
+def add_food():
+    """
+    JSON Requirement
+    userID      ID of the user wants to add the food
+    userJWT     JWT stored in the frontend
+    foodName    Name of the food
+    calories    Calories of the food
+    nutriSelect Parameter of nutrition of the food
+    nutriVal    Values of the nutrition
+    """
+    if request.method == 'POST':
+        food = request.json
+        # JWT Verification
+        if not JWTverification(JWT = str(food['userJWT']), userID = int(food['userID'])):
+            abort(401)
+        # Authority Verification
+        userAuthority = getUserAuthority(food['userID'])
+        db = get_db()
+        sqlCode = '''INSERT INTO Foods(%s) VALUES (%s)''' % (food['nutriSelect'] + ',foodNameCHN, calories, addUser', food['nutriVal'] + ',"' + food['foodName'] + '",' + str(food['calories']) + ',' + str(food['userID']))
+        # Insert into requests tables
+        if userAuthority == 'citizen' or userAuthority == 'manager':
+            content = 'Add Food Named:' + food['foodName']
+            sql = '''INSERT INTO Requests(userID, content, sqlCode) VALUES(%i, \"%s\", \"%s\")''' % (food['userID'], content, sqlCode)
+            db.execute(sql)
+            db.commit()
+            return 'succeedRequested'
+        # Directly insert into food table
+        elif userAuthority == 'mayor':
+            db.execute(sqlCode)
+            db.commit()
+            return 'succeed'
+        else:
+            abort(400)
+@food.route('/update', methods=('GET', 'POST'))
+def update_food():
+    """
+    JSON Requirement
+    userID      ID of the user wants to update food description
+    userJWT     JWT stored in the frontend
+    foodID      ID of the food user wants to edit
+    updatePara  Description of the update
+    """
+    if request.method == 'POST':
+        food = request.json
+        # JWT Verification
+        if not JWTverification(JWT = str(food['userJWT']), userID = int(food['userID'])):
+            abort(401)
+        db = get_db()
+        sqlCode = '''UPDATE Foods SET %s WHERE foodID = %i''' % (food['updatePara'], food['foodID'])
+        userAuthority = getUserAuthority(food['userID'])
+        if userAuthority == 'citizen' or userAuthority == 'manager':
+            content = 'UPDATE Food Description of the food_id:' + str(food['foodID'])
+            sql = '''INSERT INTO Requests(userID, content, sqlCode) VALUES(%i, "%s", "%s")''' % (food['userID'], content, sqlCode)
+            db.execute(sql)
+            db.commit()
+            return 'succeedRequested'
+        elif userAuthority == 'mayor':
+            db.execute(sqlCode)
+            db.commit()
+            return 'succeed'
+        else:
+            abort(400)
+
+@food.route('/del', methods=('GET', 'POST'))
+def del_food():
+    """
+    JSON Requirement
+    userID      ID of the user
+    userJWT     JWT stored in the frontend
+    foodID      ID of the food waiting to be deleted
+    """
+    if request.method == 'POST':
+        food = request.json
+        # JWT Verification
+        if not JWTverification(JWT = str(food['userJWT']), userID = int(food['userID'])):
+            abort(401)
+        db = get_db()
+        cursor = db.execute('''SELECT addUser FROM Foods WHERE foodID = %i''' % food['foodID'])
+        dictData = [row[0] for row in cursor.fetchall()]
+        if food['userID'] in dictData:
+            sql = '''DELETE FROM Foods WHERE foodID=%i AND addUser=%i''' % (food['foodID'], food['userID'])
+            db.execute(sql)
+            db.commit()
+            return 'succeed'
+        else:
+            abort(401)
+
 
 # - Users
 @user.route('/addUser', methods=('GET','POST'))
@@ -284,21 +383,40 @@ def del_rating():
         db.commit()
         return 'succeed'
 
-@user.route('/addToFav', methods=('GET','POST'))
-def add_fav():
+@user.route('/delUser', methods=('GET','POST'))
+def del_user():
     """
     JSON Requirement
     userID      ID of the user
     userJWT     JWT of the user
-    foodID      ID of the food
     """
     if request.method == 'POST':
-        record = request.json
+        user = request.json
+        db = get_db()
+        cursor = db.execute('''SELECT userID FROM Users WHERE userID = %i''' % user['userID'])
+        dictData = [row[0] for row in cursor.fetchall()]
+        if user['userID'] not in dictData:
+            abort(400)
         # JWT Verification
-        if not JWTverification(JWT=str(record['userJWT']), userID=int(record['userID'])):
+        if not JWTverification(JWT=user['userJWT'], userID=user['userID']):
             abort(401)
-        # Add to favourite
- 
+        # Delete Users' Ratings 
+        sql = '''DELETE FROM Ratings WHERE userID = %i''' % user['userID']
+        db.execute(sql)
+        db.commit()
+        # Delete User's Records
+        sql = '''DELETE FROM Records WHERE userID = %i''' % user['userID']
+        db.execute(sql)
+        db.commit()
+        # Delete User's Requests
+        sql = '''DELETE FROM Requests WHERE userID = %i''' % user['userID']
+        db.execute(sql)
+        db.commit()
+        # Delete User's Profile
+        sql = '''DELETE From Users WHERE userID = %i''' % user['userID']
+        db.execute(sql)
+        db.commit()
+        return 'succeed'
 
 # - Records
 @record.route('/addRecord', methods=('GET','POST'))
