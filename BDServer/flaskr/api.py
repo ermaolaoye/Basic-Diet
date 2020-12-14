@@ -20,12 +20,14 @@ food = NestedBlueprint(bp, 'Food') # APIs about foods
 user = NestedBlueprint(bp, 'User') # APIs about users
 record = NestedBlueprint(bp, 'Record') # APIs about records
 
-def query2Json(sql, para, abort400=False):
+def query2Json(sql, para, abort400=False, returnNull=False):
     """
     Parameters:
     sql         The sql statement
     para        The parameter for the sql statement
     abort400    A boolean variable, if cannot find the corresponding item then abort HTTP 400 error.
+    returnNull  Return -1 if cannot find the corresponding item.
+                    - abort400 and returnNull cannot both be true at the same time
     """
     db = get_db()
     cursor = db.execute(sql % para)
@@ -33,6 +35,9 @@ def query2Json(sql, para, abort400=False):
     if abort400 == True:
         if not dictData: # Empty dictionary evaluate to False in python
             abort(400)
+    if returnNull == True:
+        if not dictData:
+            return -1
     return json.dumps(dictData)
 
 def getUserID(para):
@@ -212,6 +217,89 @@ def update_user_password():
         db.commit()
         return 'succeed'
 
+@user.route('/ratingFood', methods=('GET','POST'))
+def addRating():
+    """
+    JSON Requirement
+    userJWT     JWT stored in the frontend
+    userID      ID of the user
+    foodID      ID of the food that user want to rate
+    rating      Score that food get
+    """
+    if request.method == 'POST':
+        record = request.json
+        # JWT Verification
+        if not JWTverification(JWT=str(record['userJWT']), userID=record['userID']):
+            abort(401)
+        # Check IF foodID is exist in the database
+        db = get_db()
+        cursor = db.execute("SELECT foodID FROM Ratings WHERE userID = %i" % record['userID'])
+        dictData = [row[0] for row in cursor.fetchall()]
+        # IF Rating record already exist, update the record
+        if record['foodID'] in dictData:
+            sql = '''UPDATE Ratings SET rating=%i WHERE userID=%i AND foodID = %i''' % (record['rating'], record['userID'], record['foodID'])
+        # IF does not exist, add the record
+        else:
+            sql = '''INSERT INTO Ratings(userID, foodID, rating) VALUES(%i, %i, %i)''' % (record['userID'], record['foodID'], record['rating'])
+        db.execute(sql)
+        db.commit()
+        return "succeed"
+
+@user.route('/getRating', methods=('GET', 'POST'))
+def get_rating():
+    """
+    JSON Requirement
+    userID      ID of the user
+    userJWT     JWT stored in the frontend
+    foodID      ID of the food
+    """
+    if request.method == 'POST':
+        record = request.json
+        # JWT Verification
+        if not JWTverification(JWT=record['userJWT'], userID=record['userID']):
+            abort(401)
+        # Get corresponding rating
+        sql = '''SELECT rating FROM Ratings WHERE userID = %i AND foodID = %i''' 
+        para = (record['userID'], record['foodID'])
+        json = query2Json(sql=sql, para=para, returnNull=True)
+        return json
+
+@user.route('/delRating', methods=('GET','POST'))
+def del_rating():
+    """
+    JSON Requirement
+    userID      ID of the user
+    userJWT    JWT stored in the frontend
+    foodID      ID of the food
+    """
+    if request.method == 'POST':
+        record = request.json
+        # JWT Verification
+        if not JWTverification(JWT=str(record['userJWT']), userID=int(record['userID'])):
+            abort(401)
+        # Delete Ratings
+        sql = '''DELETE FROM Ratings WHERE foodID=%i AND userID=%i''' % (record['foodID'],record['userID'])
+        db = get_db()
+        db.execute(sql)
+        db.commit()
+        return 'succeed'
+
+@user.route('/addToFav', methods=('GET','POST'))
+def add_fav():
+    """
+    JSON Requirement
+    userID      ID of the user
+    userJWT     JWT of the user
+    foodID      ID of the food
+    """
+    if request.method == 'POST':
+        record = request.json
+        # JWT Verification
+        if not JWTverification(JWT=str(record['userJWT']), userID=int(record['userID'])):
+            abort(401)
+        # Add to favourite
+ 
+
 # - Records
 @record.route('/addRecord', methods=('GET','POST'))
 def record_register():
@@ -271,17 +359,57 @@ def get_record_description():
             startDate = record['rangeVal']
             endDate = str(str(startDate[0:8]) + str(int(startDate[8:10])+6))
             # Query the database
-            sql = """SELECT foodID, quantity, unit, date FROM Records WHERE date(date) BETWEEN date(\"%s\") AND date(\"%s\")"""
+            sql = """SELECT recordID, foodID, quantity, unit, date FROM Records WHERE date(date) BETWEEN date(\"%s\") AND date(\"%s\")"""
             para = (startDate, endDate)
             json = query2Json(sql=sql, para=para, abort400=True)
             return json
         elif record['rangeType'] == 'ID':
-            sql = """SELECT foodID, quantity, unit, date FROM Records WHERE recordID = %i"""
+            sql = """SELECT recordID, foodID, quantity, unit, date FROM Records WHERE recordID = %i"""
             para = int(record['rangeVal'])
             json = query2Json(sql=sql, para=para, abort400=True)
             return json
         else:
             abort(400)
 
+@record.route('/update', methods=('GET','POST'))
+def update_record():
+    """
+    JSON Requirement
+    userJWT     JWT stored in the frontend
+    userID      The ID of the user
+    recordID    The ID of the record
+    newQuantity New value for quantity of that record, float number
+    newDate     New value for the date of the record, format yyyy-mm-dd H:M:S
+    newUnit     New value for the unit of the record
+    """
+    if request.method == 'POST':
+        record = request.json
+        # JWT verification
+        if not JWTverification(JWT=record['userJWT'], userID=record['userID']):
+            abort(401)
+        # Update Records
+        sql = '''UPDATE Records SET date=\"%s\", quantity=%f, unit=\"%s\" WHERE recordID = %i AND userID = %i''' % (record['newDate'], record['newQuantity'], record['newUnit'], record['recordID'], record['userID']) # make sure user can only update their own record
+        db=get_db()
+        db.execute(sql)
+        db.commit()
+        return "succeed"
 
-
+@record.route('/delete', methods=('GET','POST'))
+def del_record():
+    """
+    JSON Requirement
+    userID      The ID of the user
+    userJWT     The JWT of the user
+    recordID    The ID of the record being deleted
+    """
+    if request.method == 'POST':
+        record = request.json
+        # JWT Verification
+        if not JWTverification(JWT=record['userJWT'], userID=record['userID']):
+            abort(401)
+        # Delete from database
+        sql = '''DELETE FROM Records WHERE recordID = %i AND userID= %i''' % (record['recordID'], record['userID'])
+        db = get_db()
+        db.execute(sql)
+        db.commit()
+        return 'succeed'
