@@ -23,10 +23,10 @@ record = NestedBlueprint(bp, 'Record') # APIs about records
 def query2Json(sql, para, abort400=False, returnNull=False):
     """
     Parameters:
-    sql         The sql statement
-    para        The parameter for the sql statement
-    abort400    A boolean variable, if cannot find the corresponding item then abort HTTP 400 error.
-    returnNull  Return -1 if cannot find the corresponding item.
+    sql         str, The sql statement
+    para        str, The parameter for the sql statement
+    abort400    bool, A boolean variable, if cannot find the corresponding item then abort HTTP 400 error.
+    returnNull  bool, Return -1 if cannot find the corresponding item.
                     - abort400 and returnNull cannot both be true at the same time
     """
     db = get_db()
@@ -43,7 +43,7 @@ def query2Json(sql, para, abort400=False, returnNull=False):
 def getUserID(para):
     """
     Parameters:
-    para        Parameter for filtering the userID
+    para        str, Parameter for filtering the userID
                 Parameter needs to contain \" when utilizing string data
     """
     db = get_db()
@@ -55,8 +55,8 @@ def getUserID(para):
 def JWTverification(JWT, userID):
     """
     Parameters:
-    JWT         JWT input from the frontend
-    userID      ID of the user for verificating its JWT
+    JWT         str, JWT input from the frontend
+    userID      int, ID of the user for verificating its JWT
     """
     # Find the JWT stored in the server corresponding with the input
     sql = '''SELECT JWT FROM Users WHERE userID=%i''' % userID
@@ -72,7 +72,7 @@ def JWTverification(JWT, userID):
 def getUserAuthority(userID) -> str:
     """
     Parameters:
-    userID      ID of the user
+    userID      int, ID of the user
     """
     sql = '''SELECT userAuthority FROM Users WHERE userID = %i''' % userID
     db = get_db()
@@ -172,9 +172,9 @@ def update_food():
 def del_food():
     """
     JSON Requirement
-    userID      ID of the user
-    userJWT     JWT stored in the frontend
-    foodID      ID of the food waiting to be deleted
+    userID      int, ID of the user
+    userJWT     str, JWT stored in the frontend
+    foodID      int, ID of the food waiting to be deleted
     """
     if request.method == 'POST':
         food = request.json
@@ -198,12 +198,12 @@ def del_food():
 def user_register():
     """
     JSON Requirement
-    userName    A string value that contains user name
-    userGender  A string value that tells user gender
-    password    A string value that contains SHA2 hashed value of password
-    userEmail   A string value that contains user email
-    userWeight  A integer value of the user's weight
-    userBirthdayA string value of user's birthday in format yyyy-mm-dd
+    userName    str, A string value that contains user name
+    userGender  str, A string value that tells user gender
+    password    str, A string value that contains SHA2 hashed value of password
+    userEmail   str, A string value that contains user email
+    userWeight  int, A integer value of the user's weight
+    userBirthdaystr, A string value of user's birthday in format yyyy-mm-dd
     """
     if request.method == 'POST':
         user = request.json
@@ -228,8 +228,8 @@ def user_register():
 def user_login():
     """
     JSON Requirement
-    userEmail   Email of the user
-    password    Password input
+    userEmail   str, Email of the user
+    password    str, Password input
     """
     if request.method == 'POST':
         user = request.json
@@ -258,8 +258,8 @@ def user_login():
 def get_user_description():
     """
     JSON Requirement
-    userJWT     JWT stored in the frontend
-    userID      The ID of the user
+    userJWT     str, JWT stored in the frontend
+    userID      int, The ID of the user
     """
     if request.method == 'POST':
         user = request.json
@@ -275,11 +275,11 @@ def get_user_description():
 def update_user_profile():
     """
     JSON Requirement
-    userJWT     JWT stored in the frontend
-    userID      The ID of the user
-    userName    New name of the user
-    userGender  New gender of the user
-    userEmail   New email of the user
+    userJWT     str, JWT stored in the frontend
+    userID      int, The ID of the user
+    userName    str, New name of the user
+    userGender  str, New gender of the user
+    userEmail   str, New email of the user
     """
     if request.method == 'POST':
         user = request.json
@@ -297,9 +297,9 @@ def update_user_profile():
 def update_user_password():
     """
     JSON Requirement
-    oriPassword Original Password stored in the database
-    newPassword New Password that user want to set
-    userID      The ID of the user
+    oriPassword str, Original Password stored in the database
+    newPassword str, New Password that user want to set
+    userID      int, The ID of the user
     """
     if request.method == 'POST':
         user = request.json
@@ -320,10 +320,10 @@ def update_user_password():
 def addRating():
     """
     JSON Requirement
-    userJWT     JWT stored in the frontend
-    userID      ID of the user
-    foodID      ID of the food that user want to rate
-    rating      Score that food get
+    userJWT     str, JWT stored in the frontend
+    userID      int, ID of the user
+    foodID      int, ID of the food that user want to rate
+    rating      int, Score that food get
     """
     if request.method == 'POST':
         record = request.json
@@ -348,9 +348,9 @@ def addRating():
 def get_rating():
     """
     JSON Requirement
-    userID      ID of the user
-    userJWT     JWT stored in the frontend
-    foodID      ID of the food
+    userID      int, ID of the user
+    userJWT     str, JWT stored in the frontend
+    foodID      int, ID of the food
     """
     if request.method == 'POST':
         record = request.json
@@ -367,9 +367,9 @@ def get_rating():
 def del_rating():
     """
     JSON Requirement
-    userID      ID of the user
-    userJWT    JWT stored in the frontend
-    foodID      ID of the food
+    userID      int, ID of the user
+    userJWT     str, JWT stored in the frontend
+    foodID      int, ID of the food
     """
     if request.method == 'POST':
         record = request.json
@@ -387,8 +387,8 @@ def del_rating():
 def del_user():
     """
     JSON Requirement
-    userID      ID of the user
-    userJWT     JWT of the user
+    userID      int, ID of the user
+    userJWT     str, JWT of the user
     """
     if request.method == 'POST':
         user = request.json
@@ -423,11 +423,11 @@ def del_user():
 def record_register():
     """
     JSON Requirement
-    userID      ID of the user
-    userJWT     JWT stored in the frontend
-    foodID      ID of the food
-    quantity    Quantity of consumption
-    unit        string value of unit
+    userID      int, ID of the user
+    userJWT     str, JWT stored in the frontend
+    foodID      int, ID of the food
+    quantity    float, Quantity of consumption
+    unit        str, string value of unit
     """
     if request.method == 'POST':
         record = request.json
@@ -450,14 +450,14 @@ def record_register():
 def get_record_description():
     """
     JSON Requirement
-    userID      ID of the user
-    userJWT     JWT of the user
-    rangeType   Type of range of records: Day, Week, Month, ID
+    userID      int, ID of the user
+    userJWT     str, JWT of the user
+    rangeType   str, Type of range of records: Day, Week, Month, ID
                     - Day: yyyy-mm-dd
                     - Week: yyyy-mm-dd of the start(Monday) of the week
                     - Month: yyyy-mm
                     - ID: id of the record 
-    rangeVal    Value of the range
+    rangeVal    str, Value of the range
     """
     if request.method == 'POST':
         record = request.json
@@ -493,12 +493,12 @@ def get_record_description():
 def update_record():
     """
     JSON Requirement
-    userJWT     JWT stored in the frontend
-    userID      The ID of the user
-    recordID    The ID of the record
-    newQuantity New value for quantity of that record, float number
-    newDate     New value for the date of the record, format yyyy-mm-dd H:M:S
-    newUnit     New value for the unit of the record
+    userJWT     str, JWT stored in the frontend
+    userID      int, The ID of the user
+    recordID    int, The ID of the record
+    newQuantity float, New value for quantity of that record, float number
+    newDate     str, New value for the date of the record, format yyyy-mm-dd H:M:S
+    newUnit     float, New value for the unit of the record
     """
     if request.method == 'POST':
         record = request.json
@@ -516,9 +516,9 @@ def update_record():
 def del_record():
     """
     JSON Requirement
-    userID      The ID of the user
-    userJWT     The JWT of the user
-    recordID    The ID of the record being deleted
+    userID      int, The ID of the user
+    userJWT     str, The JWT of the user
+    recordID    int, The ID of the record being deleted
     """
     if request.method == 'POST':
         record = request.json
