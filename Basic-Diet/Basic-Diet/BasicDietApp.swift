@@ -11,7 +11,7 @@ import SwiftUI
 struct BasicDietApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            foodInfo(food: Food.default)
         }
     }
 }
