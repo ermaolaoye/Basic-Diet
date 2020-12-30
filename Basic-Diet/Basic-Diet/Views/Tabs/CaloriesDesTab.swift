@@ -36,7 +36,7 @@ struct caloriesDesTab: View {
                     .font(.body)
                     .foregroundColor(basicColors.captionColor)
                 Spacer()
-                if let type = food.type {
+                if food.type != nil {
                     VStack {
                         ZStack {
                             HStack {

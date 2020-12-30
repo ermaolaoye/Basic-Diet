@@ -7,18 +7,19 @@
 
 import SwiftUI
 
-struct foodInfo: View {
+struct FoodInfo: View {
     var food: Food
     var body: some View {
         ScrollView {
-            foodPreviewTab(food: Food.default)
-            caloriesDesTab(food: Food.default)
+            foodPreviewTab(food: food)
+            caloriesDesTab(food: food)
+            NutritionTab(food: food)
         }
     }
 }
 
-struct foodInfo_Previews: PreviewProvider {
+struct FoodInfo_Previews: PreviewProvider {
     static var previews: some View {
-        foodInfo(food: Food.default)
+        FoodInfo(food: referenceFoods.chickenBreast)
     }
 }
