@@ -24,54 +24,13 @@ struct NutritionTab: View {
                     Spacer()
                 }.padding()
                 VStack { // Nutritions
-                    VStack { // Protein
-                        HStack {
-                            Text("Protein")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(basicColors.textColor)
-                                
-                            Spacer()
-                            Text(String(food.protein!) + food.unitMap!["protein"]!)
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(basicColors.textColor)
-                        }
-                        ProgressBar(value: Float(getProportion(nutrition: food.protein!, unit: food.unitMap!["protein"]!))).frame(height: 15)
-                    }
-                    VStack {
-                        HStack { // Carbohydrate
-                            Text("Carbohydrate")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(basicColors.textColor)
-                                
-                            Spacer()
-                            Text(String(food.carbohydrate!) + food.unitMap!["carbohydrate"]!)
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(basicColors.textColor)
-                        }
-                        ProgressBar(value: Float(getProportion(nutrition: food.carbohydrate!, unit: food.unitMap!["carbohydrate"]!))).frame(height: 15)
-                    }
-                    VStack {
-                        HStack {
-                            Text("Fat")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(basicColors.textColor)
-                            Spacer()
-                            Text(String(food.fat!) + food.unitMap!["fat"]!)
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(basicColors.textColor)
-                        }
-                        ProgressBar(value: Float(getProportion(nutrition: food.fat!, unit: food.unitMap!["fat"]!))).frame(height: 15)
-                    }
-                }
+                    NutritionProportionBar(nutritionName: "Protein", nutritionVal: food.protein!, nutritionUnit: food.unitMap!["protein"]!)
+                    NutritionProportionBar(nutritionName: "Carbohydrate", nutritionVal: food.carbohydrate!, nutritionUnit: food.unitMap!["carbohydrate"]!)
+                    NutritionProportionBar(nutritionName: "Fat", nutritionVal: food.fat!, nutritionUnit: food.unitMap!["fat"]!)
+                } // 根据健不健康换颜色<++>
                 .padding()
                 .offset(y: -30)
-            }
+            } // More Button <++>
         }.padding()
     }
 }
@@ -79,20 +38,7 @@ struct NutritionTab: View {
 struct NutritionTab_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NutritionTab(food: referenceFoods.chickenBreast)
+            NutritionTab(food: referenceFoods.chickenRice)
         }
-    }
-}
-
-func getProportion(nutrition: Float, unit: String) -> CGFloat{
-    switch unit{
-        case "g":
-            return CGFloat(nutrition / 100)
-        case "mg":
-            return CGFloat(nutrition / 1000 / 100)
-        case "mcg":
-            return CGFloat(nutrition / 1000000 / 100)
-        default:
-            return CGFloat()
     }
 }

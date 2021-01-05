@@ -14,12 +14,13 @@ struct FoodInfo: View {
             foodPreviewTab(food: food)
             caloriesDesTab(food: food)
             NutritionTab(food: food)
+            RecipeTab(food: food)
         }
     }
 }
 
 struct FoodInfo_Previews: PreviewProvider {
     static var previews: some View {
-        FoodInfo(food: referenceFoods.chickenBreast)
+        FoodInfo(food: referenceFoods.chickenRice)
     }
 }

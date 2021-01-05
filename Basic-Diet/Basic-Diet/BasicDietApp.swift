@@ -11,7 +11,7 @@ import SwiftUI
 struct BasicDietApp: App {
     var body: some Scene {
         WindowGroup {
-            FoodInfo(food: referenceFoods.chickenBreast)
+            FoodInfo(food: referenceFoods.chickenRice)
         }
     }
 }

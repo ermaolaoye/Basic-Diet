@@ -7,6 +7,14 @@
 import Foundation
 import SwiftUI
 
+extension Dictionary {
+    subscript(i: Int) -> (key:Key, value: Value){
+        get {
+            return self[index(startIndex, offsetBy: i)]
+        }
+    }
+}
+
 enum FoodType{
     case meat
     case staple
@@ -15,7 +23,7 @@ enum FoodType{
 }
 
 struct Food{
-    init(foodNameCHN: String, id: Int, barcode: String? = nil, ingredients: String? = nil, calories: Int, carbohydrate: Float? = nil, fat: Float? = nil, protein: Float? = nil, sodium: Float? = nil, cholesterol: Float? = nil, dietaryFiber: Float? = nil, vitaminA: Float? = nil, carotene: Float? = nil, vitaminE: Float? = nil, vitaminB1: Float? = nil, vitaminB2: Float? = nil, vitaminC: Float? = nil, niacin: Float? = nil, phosphorus: Float? = nil, potassium: Float? = nil, magnesium: Float? = nil, calcium: Float? = nil, iron: Float? = nil, zinc: Float? = nil, selenium: Float? = nil, copper: Float? = nil, manganese: Float? = nil, unitMap: Dictionary<String, String>? = nil, addUserName: String? = nil, type: FoodType? = nil, imageName: String? = nil) {
+    init(foodNameCHN: String, id: Int, barcode: String? = nil, ingredients: Dictionary<String, String>? = nil, calories: Int, carbohydrate: Float? = nil, fat: Float? = nil, protein: Float? = nil, sodium: Float? = nil, cholesterol: Float? = nil, dietaryFiber: Float? = nil, vitaminA: Float? = nil, carotene: Float? = nil, vitaminE: Float? = nil, vitaminB1: Float? = nil, vitaminB2: Float? = nil, vitaminC: Float? = nil, niacin: Float? = nil, phosphorus: Float? = nil, potassium: Float? = nil, magnesium: Float? = nil, calcium: Float? = nil, iron: Float? = nil, zinc: Float? = nil, selenium: Float? = nil, copper: Float? = nil, manganese: Float? = nil, unitMap: Dictionary<String, String>? = nil, addUserName: String? = nil, type: FoodType? = nil, imageName: String? = nil) {
         self.foodNameCHN = foodNameCHN
         self.id = id
         self.barcode = barcode
@@ -52,7 +60,7 @@ struct Food{
     var foodNameCHN: String
     var id: Int
     var barcode: String?
-    var ingredients: String?
+    var ingredients: Dictionary<String, String>?
     var calories: Int
     var carbohydrate: Float?
     var fat: Float?
@@ -100,6 +108,7 @@ struct Food{
 struct referenceFoods: Decodable{
     // per slice
     static var chickenBreast: Food = Food(foodNameCHN: "Chicken Breast", id: 764, calories: 133, carbohydrate: 2.0, fat: 5.0, protein: 19.0, sodium: 34.0, cholesterol: 82.0, dietaryFiber: 0.0,unitMap: ["calories":"Kcal","vitaminB1":"mg","calcium":"mg","protein":"g","vitaminB2":"mg","magnesium":"mg","fat":"g","niacin":"mg","iron":"mg","carbohydrate":"g","vitaminC":"mg","manganese":"mg","dietaryFiber":"g","vitaminE":"mg","zinc":"mg","vitaminA":"mcg","cholesterol":"mg","copper":"mg","carotene":"mcg","potassium":"mg","phosphorus":"mg","sodium":"mg","selenium":"mcg"], type: FoodType.meat, imageName: "test")
+    static var chickenRice: Food = Food(foodNameCHN: "Chicken Fried Rice", id: 9999, barcode: nil, ingredients: ["Chicken" : "100g", "Rice": "100g"], calories: 249, carbohydrate: 28.0, fat: 5.0, protein: 22.0, sodium: 26.0, cholesterol: 82.0, dietaryFiber: 0.0, vitaminA: nil, carotene: nil, vitaminE: nil, vitaminB1: nil, vitaminB2: nil, vitaminC: nil, niacin: nil, phosphorus: nil, potassium: nil, magnesium: nil, calcium: nil, iron: nil, zinc: nil, selenium: nil, copper: nil, manganese: nil, unitMap: ["calories":"Kcal","vitaminB1":"mg","calcium":"mg","protein":"g","vitaminB2":"mg","magnesium":"mg","fat":"g","niacin":"mg","iron":"mg","carbohydrate":"g","vitaminC":"mg","manganese":"mg","dietaryFiber":"g","vitaminE":"mg","zinc":"mg","vitaminA":"mcg","cholesterol":"mg","copper":"mg","carotene":"mcg","potassium":"mg","phosphorus":"mg","sodium":"mg","selenium":"mcg"], addUserName: nil, type: FoodType.staple, imageName: "test")
     
     // per bowl
     static var rice: Food = Food(name: "Rice", id: 56, calories: 208, imageName: nil, type: FoodType.staple)

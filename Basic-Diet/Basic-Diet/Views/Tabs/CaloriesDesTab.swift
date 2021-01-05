@@ -13,7 +13,7 @@ struct caloriesDesTab: View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .fill(basicColors.basicGradient)
-                .frame(height: 250, alignment: .center)
+                .frame(height: 200, alignment: .center)
                 .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.2), radius: 10/*@END_MENU_TOKEN@*/, x: /*@START_MENU_TOKEN@*/0.0, y: 9.0)
             VStack {
                 HStack {    // Title
@@ -23,64 +23,35 @@ struct caloriesDesTab: View {
                         .foregroundColor(basicColors.textColor)
                     Spacer()
                 }.padding()
-                HStack {
-                    Text(String(food.calories))
-                        .font(.largeTitle)
-                        .fontWeight(.semibold)
-                    Text("Kcal")
-                        .font(.largeTitle)
-                        .fontWeight(.semibold)
-                }
-                .foregroundColor(basicColors.textColor)
-                Text("Per 100g (edible proportion)")
-                    .font(.body)
-                    .foregroundColor(basicColors.captionColor)
-                Spacer()
-                if food.type != nil {
-                    VStack {
-                        ZStack {
-                            HStack {
-                                VStack {
-                                    Text("Low")
-                                        .font(.callout)
-                                        .foregroundColor(basicColors.captionColor)
-                                        .offset(y: 5)
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .frame(width:110, height:10)
-                                        .foregroundColor(basicColors.healthyColorLight)
-                                }
-                                VStack {
-                                    Text("Medium")
-                                        .font(.callout)
-                                        .foregroundColor(basicColors.captionColor)
-                                        .offset(y: 5)
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: 110, height: 10)
-                                        .foregroundColor(basicColors.healthyColor)
-                                }
-                                VStack {
-                                    Text("High")
-                                        .font(.callout)
-                                        .foregroundColor(basicColors.captionColor)
-                                        .offset(y: 5)
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: 110, height: 10)
-                                        .foregroundColor(basicColors.healthyColorStrong)
-                                }
-                            }
-                            Circle()
-                                .strokeBorder(basicColors.healthyColor, lineWidth: 4.0)
-                                .background(Circle().foregroundColor(.white))
-                                .frame(width: 30, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                .offset(x: -170 + (340/30), y:15)
-                        }
-                        Text("About " + getComparisionFood(calories: food.calories, type: food.type!))
-                            .foregroundColor(basicColors.captionColor)
+                VStack{
+                    HStack {
+                        Text(String(food.calories))
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                        Text("Kcal")
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
                     }
-                    
-                }
+                    .foregroundColor(basicColors.textColor)
+                    Text("Per 100g (edible proportion)")
+                        .font(.body)
+                        .foregroundColor(basicColors.captionColor)
+                    Spacer()
+                    if food.type != nil {
+                        VStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(basicColors.healthyColor)
+                                .padding(.horizontal)
+                                .frame(height:15) // 根据user剩余卡路里改颜色<++>
+                            
+                            Text("About " + getComparisionFood(calories: food.calories, type: food.type!))
+                                .foregroundColor(basicColors.captionColor)
+                        }.offset(y: 10)
+                        
+                    }
+                }.offset(y: -15)
             }
-            .frame(height: 230, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .frame(height: 180, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             .offset(y:-12)
         }
         .padding()
@@ -96,6 +67,11 @@ struct caloriesDesTab_Previews: PreviewProvider {
 }
 
 func getComparisionFood(calories: Int, type: FoodType) -> String{
+   /*
+     Parameters:
+     calories       Calories of the food that want to compare
+     type           Type of the food input
+    */
     var compareCalories: Int
     var compareUnit: String
     var foodName: String

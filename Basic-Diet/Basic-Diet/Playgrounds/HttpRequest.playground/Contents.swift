@@ -6,17 +6,15 @@ struct Food: Codable {
     let cholesterol: Int
 }
 
-
-// if this is posible then ->
-func getFoodDescription(id: Int, returnFood: Food) -> Void{
+func getFoodDescription(id: Int) -> Void{
     if let url = URL(string : "http://127.0.0.1:5000/api/Food/description/"+String(id)){
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
                 let jsonDecoder = JSONDecoder() // Create an JsonDecoder instance
                 do {
                     let parsedJSON = try jsonDecoder.decode([Food].self, from: data) // try to decode the request
-                    for food in parsedJSON{
-                        //returnFood = food
+                    for food in parsedJSON {
+                        print(food)
                     }
                 } catch {
                     print(error) // Print Error Message if cannot perform the request
@@ -26,5 +24,5 @@ func getFoodDescription(id: Int, returnFood: Food) -> Void{
     }
 }
 
-//var xiaoMai: Food = getc()
+getFoodDescription(id: 1)
 

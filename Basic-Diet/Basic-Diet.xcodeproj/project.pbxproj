@@ -13,7 +13,6 @@
 		D2497D61259B5EF200405766 /* foodPreviewTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2497D60259B5EF200405766 /* foodPreviewTab.swift */; };
 		D2497D69259B60FE00405766 /* caloriesDesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2497D68259B60FE00405766 /* caloriesDesTab.swift */; };
 		D25FDC4D258BD97400399810 /* BasicDietApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25FDC4C258BD97400399810 /* BasicDietApp.swift */; };
-		D25FDC4F258BD97400399810 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25FDC4E258BD97400399810 /* ContentView.swift */; };
 		D25FDC51258BD97600399810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25FDC50258BD97600399810 /* Assets.xcassets */; };
 		D25FDC54258BD97600399810 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25FDC53258BD97600399810 /* Preview Assets.xcassets */; };
 		D25FDC5F258BD97600399810 /* Basic_DietTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25FDC5E258BD97600399810 /* Basic_DietTests.swift */; };
@@ -24,6 +23,7 @@
 		D25FDCA0259B09F200399810 /* httpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25FDC9F259B09F200399810 /* httpRequest.swift */; };
 		D26C8D68259B2D510006C049 /* FoodDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26C8D67259B2D510006C049 /* FoodDescription.swift */; };
 		D2EBFEF3259B50EA00A3673C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EBFEF2259B50EA00A3673C /* Colors.swift */; };
+		D2F0CB23259E1B78004D1284 /* NutritionProportionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0CB22259E1B78004D1284 /* NutritionProportionBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,6 @@
 		D2497D68259B60FE00405766 /* caloriesDesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = caloriesDesTab.swift; sourceTree = "<group>"; };
 		D25FDC49258BD97400399810 /* Basic-Diet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Basic-Diet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25FDC4C258BD97400399810 /* BasicDietApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDietApp.swift; sourceTree = "<group>"; };
-		D25FDC4E258BD97400399810 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D25FDC50258BD97600399810 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D25FDC53258BD97600399810 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D25FDC55258BD97600399810 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		D25FDCA4259B0B9900399810 /* HttpRequest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HttpRequest.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D26C8D67259B2D510006C049 /* FoodDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDescription.swift; sourceTree = "<group>"; };
 		D2EBFEF2259B50EA00A3673C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		D2F0CB22259E1B78004D1284 /* NutritionProportionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionProportionBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				D23EC4B3259C289F00F49FB1 /* ProgressBar.swift */,
+				D2F0CB22259E1B78004D1284 /* NutritionProportionBar.swift */,
 			);
 			path = SubTabs;
 			sourceTree = "<group>";
@@ -199,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				D2497D5F259B5ED400405766 /* Tabs */,
-				D25FDC4E258BD97400399810 /* ContentView.swift */,
 				D26C8D67259B2D510006C049 /* FoodDescription.swift */,
 			);
 			path = Views;
@@ -350,9 +350,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2F0CB23259E1B78004D1284 /* NutritionProportionBar.swift in Sources */,
 				D2497D69259B60FE00405766 /* caloriesDesTab.swift in Sources */,
 				D23EC499259B9CFF00F49FB1 /* NutritionTab.swift in Sources */,
-				D25FDC4F258BD97400399810 /* ContentView.swift in Sources */,
 				D2EBFEF3259B50EA00A3673C /* Colors.swift in Sources */,
 				D26C8D68259B2D510006C049 /* FoodDescription.swift in Sources */,
 				D25FDC81258BDED700399810 /* Food.swift in Sources */,
