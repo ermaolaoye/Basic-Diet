@@ -32,7 +32,7 @@ struct NutritionProportionBar: View {
 
 struct NutritionProportionBar_Previews: PreviewProvider {
     static var previews: some View {
-        NutritionProportionBar(nutritionName: "Protein", nutritionVal: referenceFoods.chickenBreast.protein!, nutritionUnit: referenceFoods.chickenBreast.unitMap!["Protein"]!)
+        NutritionProportionBar(nutritionName: "Protein", nutritionVal: referenceFoods.chickenBreast.protein, nutritionUnit: referenceFoods.unitMap["protein"]!)
     }
 }
 

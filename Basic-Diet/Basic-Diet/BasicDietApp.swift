@@ -12,7 +12,7 @@ struct BasicDietApp: App {
     var server = Server()
     var body: some Scene {
         WindowGroup {
-            FoodInfo(food: get_food_description(foodID: 1))
+            FoodInfo(food: getFoodDescription(id: 1))
         }
     }
 }

@@ -87,8 +87,8 @@ def get_food_description(food_id=1):
     Parameter:
     food_id     The id of the description of the food that client is looking for
     """
-    sql = """SELECT foodNameCHN, barcode, foodID, calories, carbohydrate, fat, protein, cholesterol, sodium, dietaryFiber, vitaminA, carotene, vitaminE, vitaminB1, vitaminB2, vitaminC, niacin, phosphorus, potassium, magnesium, calcium, iron, zinc, selenium, copper, manganese, addUser, type, imageID 
-    FROM Foods WHERE foodID = %i"""
+    sql = """SELECT foodNameCHN, barcode, id, calories, carbohydrate, fat, protein, cholesterol, sodium, dietaryFiber, vitaminA, carotene, vitaminE, vitaminB1, vitaminB2, vitaminC, niacin, phosphorus, potassium, magnesium, calcium, iron, zinc, selenium, copper, manganese, addUser, imageID, type
+    FROM Foods WHERE id = %i"""
     para = food_id
     json = query2Json(sql=sql, para=para, abort400=True)
     return json
@@ -153,7 +153,7 @@ def update_food():
         if not JWTverification(JWT = str(food['userJWT']), userID = int(food['userID'])):
             abort(401)
         db = get_db()
-        sqlCode = '''UPDATE Foods SET %s WHERE foodID = %i''' % (food['updatePara'], food['foodID'])
+        sqlCode = '''UPDATE Foods SET %s WHERE id = %i''' % (food['updatePara'], food['foodID'])
         userAuthority = getUserAuthority(food['userID'])
         if userAuthority == 'citizen' or userAuthority == 'manager':
             content = 'UPDATE Food Description of the food_id:' + str(food['foodID'])

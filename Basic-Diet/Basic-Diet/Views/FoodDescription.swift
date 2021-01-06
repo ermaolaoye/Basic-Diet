@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct FoodInfo: View {
-    var food: Food
+    var foodID: Int
     var body: some View {
-        ScrollView {
-            foodPreviewTab(food: food)
-            caloriesDesTab(food: food)
-            NutritionTab(food: food)
-            RecipeTab(food: food)
-        }
+        getFoodDescription(id: foodID, userCompletionHandler: { food, error in
+            if let food = food{
+                ScrollView {
+                    foodPreviewTab(food: food)
+                    caloriesDesTab(food: food)
+                    NutritionTab(food: food)
+                    RecipeTab(food: food)
+                }
+            }
+        })
     }
 }
 
 struct FoodInfo_Previews: PreviewProvider {
     static var previews: some View {
-        FoodInfo(food: get_food_description(foodID: 1))
+        FoodInfo(foodID: 1)
     }
 }

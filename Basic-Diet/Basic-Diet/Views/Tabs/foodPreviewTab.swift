@@ -20,7 +20,7 @@ struct foodPreviewTab: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(.white)
-                    food.image
+                    foodImage(imageID: food.imageID).image
                         .resizable()
                         .padding()
                     
@@ -54,7 +54,7 @@ struct foodPreviewTab: View {
 
 struct foodPreviewTab_Previews: PreviewProvider {
     static var previews: some View {
-        foodPreviewTab(food: Food.default)
+        foodPreviewTab(food: referenceFoods.chickenBreast)
             
     }
 }
