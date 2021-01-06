@@ -7,17 +7,42 @@
 
 import Foundation
 
-struct User {
-    var name: String
-    let id: Int
-    var email: String
-    var weight: Float // In kg
-    var height: Float
-    var recCalories: Float
-    var password: String
-    var birthdate: Date
-    var gender: String
-    var JWT: String
+struct User: Decodable {
+    internal init(userName: String, userID: Int, userEmail: String, userWeight: Float, userHeight: Float, userCalories: Float, userPassword: String, userBirthday: Date, userGender: String, JWT: String, currentCalories: Float? = nil, calPercent: Float = 0, caloriesLeft: Float? = nil) {
+        self.userName = userName
+        self.userID = userID
+        self.userEmail = userEmail
+        self.userWeight = userWeight
+        self.userHeight = userHeight
+        self.userCalories = userCalories
+        self.userPassword = userPassword
+        self.userBirthday = userBirthday
+        self.userGender = userGender
+        self.JWT = JWT
+        self.currentCalories = currentCalories
+        self.calPercent = calPercent
+        self.caloriesLeft = Int(userCalories - currentCalories!)
+    }
     
-    static let `default` = User(name:"Mark", id:1, email:"test@gmail.com", weight:90.0, height: 180.0, recCalories: 1000.0, password: "123123123", birthdate:Date(), gender: "Male", JWT:"test")
+    var userName: String
+    let userID: Int
+    var userEmail: String
+    var userWeight: Float // In kg
+    var userHeight: Float
+    var userCalories: Float
+    var userPassword: String
+    var userBirthday: Date
+    var userGender: String
+    var JWT: String
+    var currentCalories: Float?
+    var calPercent: Float = 0
+    var caloriesLeft: Int?
+    
+    mutating func updateCal(newCal: Float){
+        currentCalories! += newCal
+        calPercent = currentCalories! / userCalories * 100
+        caloriesLeft = Int(userCalories - currentCalories!)
+    }
+    
+    static let `default` = User(userName: "test", userID: 1, userEmail: "testEmazi@11.co", userWeight: 90, userHeight: 190, userCalories: 1900, userPassword: "test", userBirthday: Date(), userGender: "male", JWT: "test", currentCalories: 0, calPercent: 0)
 }

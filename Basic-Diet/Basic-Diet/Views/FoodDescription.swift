@@ -21,6 +21,6 @@ struct FoodInfo: View {
 
 struct FoodInfo_Previews: PreviewProvider {
     static var previews: some View {
-        FoodInfo(food: referenceFoods.chickenRice)
+        FoodInfo(food: get_food_description(foodID: 1))
     }
 }

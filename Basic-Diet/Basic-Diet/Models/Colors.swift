@@ -18,6 +18,8 @@ struct basicColors{
         startPoint: .top,
         endPoint: .bottom)
     
+    static var basicGray = Color(red: 241/255, green: 242/255, blue:246/255)
+    
     static var textColor = Color(red: 47/255, green: 53/255, blue: 66/255)
     
     static var captionColor = Color(red: 177/255, green: 186/255, blue: 198/255)

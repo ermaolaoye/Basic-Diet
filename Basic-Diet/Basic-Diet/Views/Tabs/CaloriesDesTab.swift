@@ -14,7 +14,7 @@ struct caloriesDesTab: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(basicColors.basicGradient)
                 .frame(height: 200, alignment: .center)
-                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.2), radius: 10/*@END_MENU_TOKEN@*/, x: /*@START_MENU_TOKEN@*/0.0, y: 9.0)
+                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.2), radius: 10, x:0.0, y: 9.0)
             VStack {
                 HStack {    // Title
                     Text("Calories")

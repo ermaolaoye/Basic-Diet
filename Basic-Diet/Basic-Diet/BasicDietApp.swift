@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct BasicDietApp: App {
+    var server = Server()
     var body: some Scene {
         WindowGroup {
-            FoodInfo(food: referenceFoods.chickenRice)
+            FoodInfo(food: get_food_description(foodID: 1))
         }
     }
 }
+

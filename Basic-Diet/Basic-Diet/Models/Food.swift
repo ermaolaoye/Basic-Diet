@@ -15,15 +15,15 @@ extension Dictionary {
     }
 }
 
-enum FoodType{
+enum FoodType: Int, Codable{
     case meat
     case staple
     case desert
     case beverage
 }
 
-struct Food{
-    init(foodNameCHN: String, id: Int, barcode: String? = nil, ingredients: Dictionary<String, String>? = nil, calories: Int, carbohydrate: Float? = nil, fat: Float? = nil, protein: Float? = nil, sodium: Float? = nil, cholesterol: Float? = nil, dietaryFiber: Float? = nil, vitaminA: Float? = nil, carotene: Float? = nil, vitaminE: Float? = nil, vitaminB1: Float? = nil, vitaminB2: Float? = nil, vitaminC: Float? = nil, niacin: Float? = nil, phosphorus: Float? = nil, potassium: Float? = nil, magnesium: Float? = nil, calcium: Float? = nil, iron: Float? = nil, zinc: Float? = nil, selenium: Float? = nil, copper: Float? = nil, manganese: Float? = nil, unitMap: Dictionary<String, String>? = nil, addUserName: String? = nil, type: FoodType? = nil, imageName: String? = nil) {
+struct Food: Codable{
+    init(foodNameCHN: String, id: Int? = nil, barcode: String? = nil, ingredients: Dictionary<String, String>? = nil, calories: Int, carbohydrate: Float? = nil, fat: Float? = nil, protein: Float? = nil, sodium: Float? = nil, cholesterol: Float? = nil, dietaryFiber: Float? = nil, vitaminA: Float? = nil, carotene: Float? = nil, vitaminE: Float? = nil, vitaminB1: Float? = nil, vitaminB2: Float? = nil, vitaminC: Float? = nil, niacin: Float? = nil, phosphorus: Float? = nil, potassium: Float? = nil, magnesium: Float? = nil, calcium: Float? = nil, iron: Float? = nil, zinc: Float? = nil, selenium: Float? = nil, copper: Float? = nil, manganese: Float? = nil, unitMap: Dictionary<String, String>? = nil, addUserName: String? = nil, type: FoodType? = nil, imageName: String? = nil) {
         self.foodNameCHN = foodNameCHN
         self.id = id
         self.barcode = barcode
@@ -58,7 +58,7 @@ struct Food{
     }
     
     var foodNameCHN: String
-    var id: Int
+    var id: Int?
     var barcode: String?
     var ingredients: Dictionary<String, String>?
     var calories: Int
@@ -101,7 +101,7 @@ struct Food{
         self.type = type
     }
     
-    static let `default` = Food(name: "Original Recipie Chicken", id: 1, calories: 346, imageName: "test", type: FoodType.meat)
+    static let `default` = Food(foodNameCHN: "Chicken Breast", id: 764, calories: 133, carbohydrate: 2.0, fat: 5.0, protein: 19.0, sodium: 34.0, cholesterol: 82.0, dietaryFiber: 0.0,unitMap: ["calories":"Kcal","vitaminB1":"mg","calcium":"mg","protein":"g","vitaminB2":"mg","magnesium":"mg","fat":"g","niacin":"mg","iron":"mg","carbohydrate":"g","vitaminC":"mg","manganese":"mg","dietaryFiber":"g","vitaminE":"mg","zinc":"mg","vitaminA":"mcg","cholesterol":"mg","copper":"mg","carotene":"mcg","potassium":"mg","phosphorus":"mg","sodium":"mg","selenium":"mcg"], type: FoodType.meat, imageName: "test")
     
 }
 
@@ -119,4 +119,3 @@ struct referenceFoods: Decodable{
     // per cup
     static var cola: Food = Food(name: "Cola", id: -1, calories: 141, imageName: nil, type: FoodType.beverage)
 }
-

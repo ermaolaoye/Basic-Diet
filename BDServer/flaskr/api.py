@@ -87,7 +87,7 @@ def get_food_description(food_id=1):
     Parameter:
     food_id     The id of the description of the food that client is looking for
     """
-    sql = """SELECT foodNameCHN, calories, carbohydrate, fat, protein, cholesterol 
+    sql = """SELECT foodNameCHN, barcode, foodID, calories, carbohydrate, fat, protein, cholesterol, sodium, dietaryFiber, vitaminA, carotene, vitaminE, vitaminB1, vitaminB2, vitaminC, niacin, phosphorus, potassium, magnesium, calcium, iron, zinc, selenium, copper, manganese, addUser, type, imageID 
     FROM Foods WHERE foodID = %i"""
     para = food_id
     json = query2Json(sql=sql, para=para, abort400=True)
