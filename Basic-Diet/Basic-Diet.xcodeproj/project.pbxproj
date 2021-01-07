@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D23EC499259B9CFF00F49FB1 /* NutritionTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EC498259B9CFF00F49FB1 /* NutritionTab.swift */; };
-		D23EC4A5259B9E0E00F49FB1 /* RecipeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EC4A4259B9E0E00F49FB1 /* RecipeTab.swift */; };
 		D23EC4B4259C289F00F49FB1 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EC4B3259C289F00F49FB1 /* ProgressBar.swift */; };
 		D2497D61259B5EF200405766 /* foodPreviewTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2497D60259B5EF200405766 /* foodPreviewTab.swift */; };
 		D2497D69259B60FE00405766 /* caloriesDesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2497D68259B60FE00405766 /* caloriesDesTab.swift */; };
@@ -22,6 +21,8 @@
 		D25FDC89258BE13B00399810 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25FDC88258BE13B00399810 /* Record.swift */; };
 		D25FDCA0259B09F200399810 /* httpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25FDC9F259B09F200399810 /* httpRequest.swift */; };
 		D26C8D68259B2D510006C049 /* FoodDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26C8D67259B2D510006C049 /* FoodDescription.swift */; };
+		D282BCCE25A6B625006AF4B6 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D282BCCD25A6B625006AF4B6 /* SearchBar.swift */; };
+		D28A11B525A649020099F889 /* StatusOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A11B425A649020099F889 /* StatusOverlay.swift */; };
 		D28D6D3F25A4068D0031403E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D3E25A4068D0031403E /* MainView.swift */; };
 		D28D6D4425A406D20031403E /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D4325A406D20031403E /* CircleProgressBar.swift */; };
 		D28D6D4925A420260031403E /* ActivityRingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D4825A420260031403E /* ActivityRingProgressBar.swift */; };
@@ -49,7 +50,6 @@
 
 /* Begin PBXFileReference section */
 		D23EC498259B9CFF00F49FB1 /* NutritionTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionTab.swift; sourceTree = "<group>"; };
-		D23EC4A4259B9E0E00F49FB1 /* RecipeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTab.swift; sourceTree = "<group>"; };
 		D23EC4B3259C289F00F49FB1 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		D2497D60259B5EF200405766 /* foodPreviewTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodPreviewTab.swift; sourceTree = "<group>"; };
 		D2497D68259B60FE00405766 /* caloriesDesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = caloriesDesTab.swift; sourceTree = "<group>"; };
@@ -71,6 +71,8 @@
 		D25FDC9F259B09F200399810 /* httpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = httpRequest.swift; sourceTree = "<group>"; };
 		D25FDCA4259B0B9900399810 /* HttpRequest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HttpRequest.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D26C8D67259B2D510006C049 /* FoodDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDescription.swift; sourceTree = "<group>"; };
+		D282BCCD25A6B625006AF4B6 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		D28A11B425A649020099F889 /* StatusOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOverlay.swift; sourceTree = "<group>"; };
 		D28D6D3E25A4068D0031403E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D28D6D4325A406D20031403E /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
 		D28D6D4825A420260031403E /* ActivityRingProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRingProgressBar.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				D2F0CB22259E1B78004D1284 /* NutritionProportionBar.swift */,
 				D28D6D4325A406D20031403E /* CircleProgressBar.swift */,
 				D28D6D4825A420260031403E /* ActivityRingProgressBar.swift */,
+				D282BCCD25A6B625006AF4B6 /* SearchBar.swift */,
 			);
 			path = SubTabs;
 			sourceTree = "<group>";
@@ -122,7 +125,6 @@
 				D2497D60259B5EF200405766 /* foodPreviewTab.swift */,
 				D2497D68259B60FE00405766 /* caloriesDesTab.swift */,
 				D23EC498259B9CFF00F49FB1 /* NutritionTab.swift */,
-				D23EC4A4259B9E0E00F49FB1 /* RecipeTab.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -214,6 +216,7 @@
 				D2497D5F259B5ED400405766 /* Tabs */,
 				D26C8D67259B2D510006C049 /* FoodDescription.swift */,
 				D28D6D3E25A4068D0031403E /* MainView.swift */,
+				D28A11B425A649020099F889 /* StatusOverlay.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -369,12 +372,13 @@
 				D2497D69259B60FE00405766 /* caloriesDesTab.swift in Sources */,
 				D23EC499259B9CFF00F49FB1 /* NutritionTab.swift in Sources */,
 				D2EBFEF3259B50EA00A3673C /* Colors.swift in Sources */,
+				D282BCCE25A6B625006AF4B6 /* SearchBar.swift in Sources */,
 				D26C8D68259B2D510006C049 /* FoodDescription.swift in Sources */,
 				D28D6D4425A406D20031403E /* CircleProgressBar.swift in Sources */,
 				D25FDC89258BE13B00399810 /* Record.swift in Sources */,
+				D28A11B525A649020099F889 /* StatusOverlay.swift in Sources */,
 				D25FDCA0259B09F200399810 /* httpRequest.swift in Sources */,
 				D2497D61259B5EF200405766 /* foodPreviewTab.swift in Sources */,
-				D23EC4A5259B9E0E00F49FB1 /* RecipeTab.swift in Sources */,
 				D25CF9A425A4B64400F8294B /* Food.swift in Sources */,
 				D23EC4B4259C289F00F49FB1 /* ProgressBar.swift in Sources */,
 				D25FDC7C258BDC6F00399810 /* User.swift in Sources */,

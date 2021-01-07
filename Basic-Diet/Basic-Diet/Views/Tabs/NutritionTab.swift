@@ -24,9 +24,9 @@ struct NutritionTab: View {
                     Spacer()
                 }.padding()
                 VStack { // Nutritions
-                    NutritionProportionBar(nutritionName: "Protein", nutritionVal: food.protein!, nutritionUnit: food.unitMap!["protein"]!)
-                    NutritionProportionBar(nutritionName: "Carbohydrate", nutritionVal: food.carbohydrate!, nutritionUnit: food.unitMap!["carbohydrate"]!)
-                    NutritionProportionBar(nutritionName: "Fat", nutritionVal: food.fat!, nutritionUnit: food.unitMap!["fat"]!)
+                    NutritionProportionBar(nutritionName: "Protein", nutritionVal: food.protein, nutritionUnit: referenceFoods.unitMap["protein"]!)
+                    NutritionProportionBar(nutritionName: "Carbohydrate", nutritionVal: food.carbohydrate, nutritionUnit: referenceFoods.unitMap["carbohydrate"]!)
+                    NutritionProportionBar(nutritionName: "Fat", nutritionVal: food.fat, nutritionUnit: referenceFoods.unitMap["fat"]!)
                 } // 根据健不健康换颜色<++>
                 .padding()
                 .offset(y: -30)
@@ -38,7 +38,7 @@ struct NutritionTab: View {
 struct NutritionTab_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NutritionTab(food: referenceFoods.chickenRice)
+            NutritionTab(food: referenceFoods.chickenBreast)
         }
     }
 }

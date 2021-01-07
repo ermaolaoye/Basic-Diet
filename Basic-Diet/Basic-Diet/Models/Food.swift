@@ -7,6 +7,13 @@
 import Combine
 import SwiftUI
 
+enum FoodType{
+    case meat
+    case staple
+    case desert
+    case beverage
+}
+
 extension Dictionary {
     subscript(i: Int) -> (key:Key, value: Value){
         get {
@@ -24,10 +31,22 @@ struct Food: Codable{
     // Type 0:Meat, 1:Staple, 2:Desert, 3:Beverage
 }
 
+struct SearchFood: Codable{
+    var foodNameCHN: String
+    var imageID: Int
+}
+
 // MARK: - Food Model
-class foodModel: ObservableObject{
-    @Published var foods = [Food]()
+class FoodModel: ObservableObject{
+    @Published var food = referenceFoods.loadingFood
     @Published var state: State = State.ready
+    var mode: Mode = Mode.food
+    
+    enum Mode{
+        case food
+        case searchFood
+    }
+    
     enum State{
         case ready
         case loading(Cancellable)
@@ -35,7 +54,7 @@ class foodModel: ObservableObject{
         case error(Error)
     }
     
-    var url = URL(string: "http://127.0.0.1:5000/api/Food/description/2")!
+    var url = URL(string: "http://127.0.0.1:5000/api/Food/description/1")!
     let urlSession = URLSession.shared
     
     var dataTask: AnyPublisher<[Food], Error> {
@@ -59,7 +78,9 @@ class foodModel: ObservableObject{
                                     }
                                 }, receiveValue: { value in
                                     self.state = .loaded
-                                    self.foods = value
+                                    for food in value{
+                                        self.food = food
+                                    }
                                 }))
     }
     
@@ -67,6 +88,15 @@ class foodModel: ObservableObject{
         assert(Thread.isMainThread)
         guard case .ready = self.state else { return }
         self.load()
+    }
+    
+    init(foodID: Int){
+        self.url = URL(string: Server.url + "Food/description/" + String(foodID))!
+        self.mode = Mode.food
+    }
+    init(searchContent: String){
+        self.url = URL(string: Server.url + "Food/list/" + searchContent)!
+        self.mode = Mode.searchFood
     }
     
 }
@@ -89,6 +119,11 @@ struct referenceFoods: Decodable{
     
     // per cup
     static var cola: Food = Food(foodNameCHN: "Cola", id: -1, calories: 45, carbohydrate: 11.2, fat: 0.0, protein: 0.0, cholesterol: 0.0, sodium: 11.4, dietaryFiber: 0.0, vitaminA: 0.0, carotene: 0.0, vitaminE: -1.0, vitaminB1: -1.0, vitaminB2: -1.0, vitaminC: -1.0, niacin: -1.0, phosphorus: -1.0, potassium: -1.0, magnesium: -1.0, calcium: -1.0, iron: -1.0, zinc: -1.0, selenium: -1.0, copper: -1.0, manganese: -1.0, imageID: -1, type: 3)
+    
+    // Utilities
+    static var loadingFood = Food(foodNameCHN: "", id: 0, calories: 0, carbohydrate: 0, fat: 0, protein: 0, cholesterol: 0, sodium: 0, dietaryFiber: 0, vitaminA: 0, carotene: 0, vitaminE: 0, vitaminB1: 0, vitaminB2: 0, vitaminC: 0, niacin: 0, phosphorus: 0, potassium: 0, magnesium: 0, calcium: 0, iron: 0, zinc: 0, selenium: 0, copper: 0, manganese: 0, imageID: -1, type: -1)
+    static var loadingSearchFood = SearchFood(foodNameCHN: "", imageID: -1)
+    
     
     static var unitMap: Dictionary<String, String> = ["calories":"Kcal","vitaminB1":"mg","calcium":"mg","protein":"g","vitaminB2":"mg","magnesium":"mg","fat":"g","niacin":"mg","iron":"mg","carbohydrate":"g","vitaminC":"mg","manganese":"mg","dietaryFiber":"g","vitaminE":"mg","zinc":"mg","vitaminA":"mcg","cholesterol":"mg","copper":"mg","carotene":"mcg","potassium":"mg","phosphorus":"mg","sodium":"mg","selenium":"mcg"]
 }

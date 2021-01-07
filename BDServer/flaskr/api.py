@@ -99,7 +99,7 @@ def get_list_food(user_input):
     Parameter:
     user_input  The user input of the name of food they're looking for
     """
-    sql = """SELECT foodNameCHN FROM Foods WHERE foodNameCHN LIKE '%s'"""
+    sql = """SELECT foodNameCHN, imageID FROM Foods WHERE foodNameCHN LIKE '%s'"""
     para = "%" + user_input + "%"
     json = query2Json(sql=sql, para=para, abort400=True)
     return json
@@ -182,10 +182,10 @@ def del_food():
         if not JWTverification(JWT = str(food['userJWT']), userID = int(food['userID'])):
             abort(401)
         db = get_db()
-        cursor = db.execute('''SELECT addUser FROM Foods WHERE foodID = %i''' % food['foodID'])
+        cursor = db.execute('''SELECT addUser FROM Foods WHERE id = %i''' % food['foodID'])
         dictData = [row[0] for row in cursor.fetchall()]
         if food['userID'] in dictData:
-            sql = '''DELETE FROM Foods WHERE foodID=%i AND addUser=%i''' % (food['foodID'], food['userID'])
+            sql = '''DELETE FROM Foods WHERE id=%i AND addUser=%i''' % (food['foodID'], food['userID'])
             db.execute(sql)
             db.commit()
             return 'succeed'

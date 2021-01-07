@@ -44,7 +44,7 @@ struct caloriesDesTab: View {
                                 .padding(.horizontal)
                                 .frame(height:15) // 根据user剩余卡路里改颜色<++>
                             
-                            Text("About " + getComparisionFood(calories: food.calories, type: food.type!))
+                            Text("About " + getComparisionFood(calories: Int(food.calories), type: correspondingType(type: food.type)))
                                 .foregroundColor(basicColors.captionColor)
                         }.offset(y: 10)
                         
@@ -61,8 +61,23 @@ struct caloriesDesTab: View {
 struct caloriesDesTab_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            caloriesDesTab(food: Food.default)
+            caloriesDesTab(food: referenceFoods.chickenBreast)
         }
+    }
+}
+
+func correspondingType(type: Int) -> FoodType{
+    switch type{
+    case 0:
+        return FoodType.meat
+    case 1:
+        return FoodType.staple
+    case 2:
+        return FoodType.desert
+    case 3:
+        return FoodType.beverage
+    default:
+        return FoodType.meat
     }
 }
 
@@ -77,19 +92,19 @@ func getComparisionFood(calories: Int, type: FoodType) -> String{
     var foodName: String
     switch type {
     case FoodType.meat:
-        compareCalories = referenceFoods.chickenBreast.calories
+        compareCalories = Int(referenceFoods.chickenBreast.calories)
         compareUnit = "slice"
         foodName = referenceFoods.chickenBreast.foodNameCHN
     case FoodType.beverage:
-        compareCalories = referenceFoods.cola.calories
+        compareCalories = Int(referenceFoods.cola.calories)
         compareUnit = "cup"
         foodName = referenceFoods.cola.foodNameCHN
     case FoodType.desert:
-        compareCalories = referenceFoods.oreo.calories
+        compareCalories = Int(referenceFoods.oreo.calories)
         compareUnit = "slice"
         foodName = referenceFoods.oreo.foodNameCHN
     case FoodType.staple:
-        compareCalories = referenceFoods.rice.calories
+        compareCalories = Int(referenceFoods.rice.calories)
         compareUnit = "bowl"
         foodName = referenceFoods.rice.foodNameCHN
     }
