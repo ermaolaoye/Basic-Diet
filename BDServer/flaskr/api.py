@@ -99,7 +99,7 @@ def get_list_food(user_input):
     Parameter:
     user_input  The user input of the name of food they're looking for
     """
-    sql = """SELECT foodNameCHN, imageID FROM Foods WHERE foodNameCHN LIKE '%s'"""
+    sql = """SELECT foodNameCHN, id, imageID FROM Foods WHERE foodNameCHN LIKE '%s'"""
     para = "%" + user_input + "%"
     json = query2Json(sql=sql, para=para, abort400=True)
     return json

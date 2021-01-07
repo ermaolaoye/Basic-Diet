@@ -15,13 +15,13 @@ struct FoodInfo: View {
             caloriesDesTab(food: food.food)
             NutritionTab(food: food.food)
         }
-        .overlay(StatusOverlay(model: food))
+        .overlay(StatusOverlayFood(model: food))
         .onAppear{self.food.loadIfNeeded()}
     }
 }
 
 struct FoodInfo_Previews: PreviewProvider {
     static var previews: some View {
-        FoodInfo(food: FoodModel(foodID: 4))
+        FoodInfo(food: FoodModel(foodID: 30))
     }
 }

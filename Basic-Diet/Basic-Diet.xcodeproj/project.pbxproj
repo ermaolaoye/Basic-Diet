@@ -22,13 +22,16 @@
 		D25FDCA0259B09F200399810 /* httpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25FDC9F259B09F200399810 /* httpRequest.swift */; };
 		D26C8D68259B2D510006C049 /* FoodDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26C8D67259B2D510006C049 /* FoodDescription.swift */; };
 		D282BCCE25A6B625006AF4B6 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D282BCCD25A6B625006AF4B6 /* SearchBar.swift */; };
+		D282BCD325A6E817006AF4B6 /* SearchFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = D282BCD225A6E817006AF4B6 /* SearchFood.swift */; };
+		D282BCDB25A6E959006AF4B6 /* FoodList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D282BCDA25A6E959006AF4B6 /* FoodList.swift */; };
 		D28A11B525A649020099F889 /* StatusOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A11B425A649020099F889 /* StatusOverlay.swift */; };
 		D28D6D3F25A4068D0031403E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D3E25A4068D0031403E /* MainView.swift */; };
 		D28D6D4425A406D20031403E /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D4325A406D20031403E /* CircleProgressBar.swift */; };
 		D28D6D4925A420260031403E /* ActivityRingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D4825A420260031403E /* ActivityRingProgressBar.swift */; };
-		D28D6D4E25A42C2F0031403E /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D4D25A42C2F0031403E /* Server.swift */; };
+		D28D6D4E25A42C2F0031403E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D4D25A42C2F0031403E /* Utilities.swift */; };
 		D2EBFEF3259B50EA00A3673C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EBFEF2259B50EA00A3673C /* Colors.swift */; };
 		D2F0CB23259E1B78004D1284 /* NutritionProportionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0CB22259E1B78004D1284 /* NutritionProportionBar.swift */; };
+		D2FA1D9125A6FE700032FC05 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FA1D9025A6FE700032FC05 /* SearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,13 +75,16 @@
 		D25FDCA4259B0B9900399810 /* HttpRequest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HttpRequest.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D26C8D67259B2D510006C049 /* FoodDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDescription.swift; sourceTree = "<group>"; };
 		D282BCCD25A6B625006AF4B6 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		D282BCD225A6E817006AF4B6 /* SearchFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFood.swift; sourceTree = "<group>"; };
+		D282BCDA25A6E959006AF4B6 /* FoodList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodList.swift; sourceTree = "<group>"; };
 		D28A11B425A649020099F889 /* StatusOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOverlay.swift; sourceTree = "<group>"; };
 		D28D6D3E25A4068D0031403E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D28D6D4325A406D20031403E /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
 		D28D6D4825A420260031403E /* ActivityRingProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRingProgressBar.swift; sourceTree = "<group>"; };
-		D28D6D4D25A42C2F0031403E /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		D28D6D4D25A42C2F0031403E /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		D2EBFEF2259B50EA00A3673C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		D2F0CB22259E1B78004D1284 /* NutritionProportionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionProportionBar.swift; sourceTree = "<group>"; };
+		D2FA1D9025A6FE700032FC05 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +204,8 @@
 				D25FDC7B258BDC6F00399810 /* User.swift */,
 				D25FDC88258BE13B00399810 /* Record.swift */,
 				D2EBFEF2259B50EA00A3673C /* Colors.swift */,
-				D28D6D4D25A42C2F0031403E /* Server.swift */,
+				D28D6D4D25A42C2F0031403E /* Utilities.swift */,
+				D282BCD225A6E817006AF4B6 /* SearchFood.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -215,8 +222,10 @@
 			children = (
 				D2497D5F259B5ED400405766 /* Tabs */,
 				D26C8D67259B2D510006C049 /* FoodDescription.swift */,
+				D282BCDA25A6E959006AF4B6 /* FoodList.swift */,
 				D28D6D3E25A4068D0031403E /* MainView.swift */,
 				D28A11B425A649020099F889 /* StatusOverlay.swift */,
+				D2FA1D9025A6FE700032FC05 /* SearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -375,6 +384,9 @@
 				D282BCCE25A6B625006AF4B6 /* SearchBar.swift in Sources */,
 				D26C8D68259B2D510006C049 /* FoodDescription.swift in Sources */,
 				D28D6D4425A406D20031403E /* CircleProgressBar.swift in Sources */,
+				D282BCD325A6E817006AF4B6 /* SearchFood.swift in Sources */,
+				D282BCDB25A6E959006AF4B6 /* FoodList.swift in Sources */,
+				D2FA1D9125A6FE700032FC05 /* SearchView.swift in Sources */,
 				D25FDC89258BE13B00399810 /* Record.swift in Sources */,
 				D28A11B525A649020099F889 /* StatusOverlay.swift in Sources */,
 				D25FDCA0259B09F200399810 /* httpRequest.swift in Sources */,
@@ -382,7 +394,7 @@
 				D25CF9A425A4B64400F8294B /* Food.swift in Sources */,
 				D23EC4B4259C289F00F49FB1 /* ProgressBar.swift in Sources */,
 				D25FDC7C258BDC6F00399810 /* User.swift in Sources */,
-				D28D6D4E25A42C2F0031403E /* Server.swift in Sources */,
+				D28D6D4E25A42C2F0031403E /* Utilities.swift in Sources */,
 				D25FDC4D258BD97400399810 /* BasicDietApp.swift in Sources */,
 				D28D6D4925A420260031403E /* ActivityRingProgressBar.swift in Sources */,
 			);

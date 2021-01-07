@@ -1,26 +1,22 @@
 //
-//  Server.swift
+//  SearchFood.swift
 //  Basic-Diet
 //
-//  Created by 黄子航 on 2021/1/5.
+//  Created by 黄子航 on 2021/1/7.
 //
 
-import Foundation
+import Combine
+import SwiftUI
 
-struct Server{
-    static let url: String = "http://127.0.0.1:5000/api/"
+struct SearchFood: Codable, Identifiable{
+    var foodNameCHN: String
+    var id: Int
+    var imageID: Int
 }
 
-class ServerAPIConnection: ObservableObject {
-    @Published var value = referenceFoods.loadingFood
+class SearchFoodModel: ObservableObject{
+    @Published var foods = [SearchFood]()
     @Published var state: State = State.ready
-    var mode: Mode = Mode.food
-    
-    enum Mode{
-        case food
-        case searchFood
-    }
-    
     enum State{
         case ready
         case loading(Cancellable)
@@ -28,14 +24,14 @@ class ServerAPIConnection: ObservableObject {
         case error(Error)
     }
     
-    var url = URL(string: "http://127.0.0.1:5000/api/Food/description/1")!
+    @Published var url = URL(string: "http://127.0.0.1:5000/api/Food/list/1")!
     let urlSession = URLSession.shared
     
-    var dataTask: AnyPublisher<[], Error> {
+    var dataTask: AnyPublisher<[SearchFood], Error> {
         self.urlSession
             .dataTaskPublisher(for: self.url)
             .map { $0.data }
-            .decode(type: [Food].self, decoder: JSONDecoder())
+            .decode(type: [SearchFood].self, decoder: JSONDecoder())
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }
@@ -52,9 +48,7 @@ class ServerAPIConnection: ObservableObject {
                                     }
                                 }, receiveValue: { value in
                                     self.state = .loaded
-                                    for food in value{
-                                        self.food = food
-                                    }
+                                    self.foods = value
                                 }))
     }
     
@@ -64,13 +58,11 @@ class ServerAPIConnection: ObservableObject {
         self.load()
     }
     
-    init(foodID: Int){
-        self.url = URL(string: Server.url + "Food/description/" + String(foodID))!
-        self.mode = Mode.food
-    }
-    init(searchContent: String){
-        self.url = URL(string: Server.url + "Food/list/" + searchContent)!
-        self.mode = Mode.searchFood
+    func updateURL(searchContent: String) {
+        self.url = URL(string: String(Server.url + "Food/list/" + searchContent).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
     }
     
+    init(searchContent: String){
+        self.url = URL(string: String(Server.url + "Food/list/" + searchContent).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+    }
 }
