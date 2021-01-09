@@ -49,6 +49,7 @@ class SearchFoodModel: ObservableObject{
                                 }, receiveValue: { value in
                                     self.state = .loaded
                                     self.foods = value
+                                    
                                 }))
     }
     

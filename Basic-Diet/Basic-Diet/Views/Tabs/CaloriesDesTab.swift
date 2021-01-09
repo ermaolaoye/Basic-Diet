@@ -54,7 +54,8 @@ struct caloriesDesTab: View {
             .frame(height: 180, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             .offset(y:-12)
         }
-        .padding()
+        .padding(.horizontal)
+        .padding(.vertical, 5.0)
     }
 }
 

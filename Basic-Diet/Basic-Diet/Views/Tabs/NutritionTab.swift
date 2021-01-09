@@ -31,7 +31,9 @@ struct NutritionTab: View {
                 .padding()
                 .offset(y: -30)
             } // More Button <++>
-        }.padding()
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 5.0)
     }
 }
 

@@ -12,7 +12,7 @@ struct BasicDietApp: App {
     var server = Server()
     var body: some Scene {
         WindowGroup {
-            SearchView(searchText: "")
+            RegisterView()
         }
     }
 }

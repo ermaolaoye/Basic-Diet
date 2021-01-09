@@ -29,7 +29,7 @@ struct foodPreviewTab: View {
                 .offset(x:-10)
                 VStack(alignment: .leading) {
                     Text(food.foodNameCHN)
-                        .font(.system(size: 22))
+                        .font(.system(size: 20))
                         .fontWeight(.semibold)
                         .foregroundColor(basicColors.textColor)
                         .multilineTextAlignment(.leading)
@@ -48,7 +48,9 @@ struct foodPreviewTab: View {
                 Spacer()
 
             }.padding()
-        }.padding()
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 5.0)
     }
 }
 
@@ -74,7 +76,7 @@ struct FoodPreviewTabSimple: View{
                 .offset(x:-10)
                 VStack(alignment: .leading) {
                     Text(food.foodNameCHN)
-                        .font(.system(size: 22))
+                        .font(.system(size: 20))
                         .fontWeight(.semibold)
                         .foregroundColor(basicColors.textColor)
                         .multilineTextAlignment(.leading)
@@ -82,12 +84,13 @@ struct FoodPreviewTabSimple: View{
                 Spacer()
 
             }.padding()
-        }.padding()
+        }
+        .padding(.horizontal)
     }
 }
 
 struct foodPreviewTab_Previews: PreviewProvider {
     static var previews: some View {
-        FoodPreviewTabSimple(food: referenceFoods.loadingSearchFood)
+        foodPreviewTab(food: referenceFoods.chickenBreast)
     }
 }

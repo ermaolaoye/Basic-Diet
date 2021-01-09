@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 struct Server{
-    static let url: String = "http://127.0.0.1:5000/api/"
+    static let url: String = "http://192.168.31.109:5000/api/"
 }
 
 struct referenceFoods: Decodable{

@@ -203,6 +203,7 @@ def user_register():
     password    str, A string value that contains SHA2 hashed value of password
     userEmail   str, A string value that contains user email
     userWeight  int, A integer value of the user's weight
+    userHeight  int, A integer value of the user's height
     userBirthdaystr, A string value of user's birthday in format yyyy-mm-dd
     """
     if request.method == 'POST':
@@ -530,4 +531,7 @@ def del_record():
         db = get_db()
         db.execute(sql)
         db.commit()
+        B
+        B
+        B
         return 'succeed'
