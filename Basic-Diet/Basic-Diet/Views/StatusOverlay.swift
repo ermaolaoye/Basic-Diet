@@ -56,3 +56,25 @@ struct StatusOverlaySearchFood: View{
         }
     }
 }
+
+struct StatusOverlayRegisterUser: View{
+    @ObservedObject var model: HttpAuth
+    var body: some View{
+        switch model.state{
+        case .ready:
+            return AnyView(EmptyView())
+        case .loading:
+            return AnyView(
+                Text("Loading")
+            )
+        case .loaded:
+            return AnyView(EmptyView())
+        case .error:
+            return AnyView(
+                Text("Error Happended Please Retry")
+                .padding()
+                .background(Color.yellow)
+            )
+        }
+    }
+}

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RegisterView: View {
     @State private var userName: String = ""
-    @State private var userGender: String = ""
+    @State private var userGender: String = "Male"
     @State private var password: String = ""
     @State private var userEmail: String = ""
     @State private var userWeight: Int = 0
@@ -18,6 +18,7 @@ struct RegisterView: View {
     
     @State private var userWeightText: String = ""
     @State private var userHeightText: String = ""
+    @State private var passwordInput: String = ""
     
     @State private var userBirthdayDate = Date()
     
@@ -26,13 +27,15 @@ struct RegisterView: View {
     
     @ObservedObject var manager = HttpAuth()
     
+    @State private var isEmailValid: Bool = true
+    
+    @State private var buttonClicked: Bool = false
     
     var body: some View {
         VStack(alignment: .leading){
             if self.manager.authenticated {
-                Text("Succeed")
-            }
-            Form{
+                Text("Register Succeed")
+            } else {
                 VStack(alignment: .leading){
                     Text("Username")
                     TextField("Enter...", text: $userName)
@@ -41,16 +44,36 @@ struct RegisterView: View {
                         .autocapitalization(.none)
                     
                     Text("Password")
-                    TextField("Enter...", text: $password)
+                    TextField("Enter...", text: $passwordInput)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .border(Color.gray)
                         .autocapitalization(.none)
+                        .onChange(of: passwordInput, perform: { value in
+                            self.password = hashText(string: passwordInput)
+                        })
                     
-                    Text("Email")
-                    TextField("Enter...", text: $userEmail)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .border(Color.gray)
-                        .autocapitalization(.none)
+                    
+                    HStack{
+                        Text("Email")
+                        Spacer()
+                        if !self.isEmailValid {
+                            Text("Email is invalid")
+                                .foregroundColor(.red)
+                        }
+                    }
+                    TextField("Enter...", text: $userEmail, onEditingChanged: { (isChanged) in
+                        if !isChanged {
+                            if textFieldValidator(string: self.userEmail, regularExpression: #"^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$"#){
+                                self.isEmailValid = true
+                            } else {
+                                self.isEmailValid = false
+                                self.userEmail = ""
+                            }
+                        }
+                    })
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .border(Color.gray)
+                    .autocapitalization(.none)
                 }
                 
                 Text("Gender")
@@ -98,22 +121,40 @@ struct RegisterView: View {
                     dateFormatter.dateFormat = "YYYY-MM-dd"
                     self.userBirthday = dateFormatter.string(from: userBirthdayDate)
                 })
-            }
-            Button(action:{
-                self.manager.postAuth(user: RegisterUser(userName: userName, userGender: userGender, password: password, userEmail: userEmail, userWeight: userWeight, userHeight: userHeight, userBirthday: userBirthday))
-            }){
-                HStack{
-                    Spacer()
-                    Text("Register")
-                    Spacer()
+                
+                
+                Button(action:{
+                    self.manager.state = .loading
+                    self.buttonClicked = true
+                    self.manager.postAuth(user: RegisterUser(userName: userName, userGender: userGender, password: password, userEmail: userEmail, userWeight: userWeight, userHeight: userHeight, userBirthday: userBirthday))
+                }){
+                    HStack{
+                        Spacer()
+                        ZStack{
+                            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                                .accentColor(basicColors.healthyColor)
+                            Text("Register")
+                                .foregroundColor(basicColors.textColor)
+                        }
+                        .frame(width: 100.0, height: 40.0)
+                        Spacer()
+                    }
                 }
+                .disabled(self.userName.isEmpty || self.password.isEmpty || self.userEmail.isEmpty || self.userWeight == 0 || self.userHeight == 0 || self.userBirthday == "" || self.buttonClicked == true)
             }
-        }
+        }.padding()
+        .overlay(StatusOverlayRegisterUser(model: manager))
     }
+    
 }
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         RegisterView()
     }
+}
+
+func textFieldValidator(string: String, regularExpression: String) -> Bool{
+    let textPredicate = NSPredicate(format:"SELF MATCHES %@", regularExpression)
+    return textPredicate.evaluate(with: string)
 }

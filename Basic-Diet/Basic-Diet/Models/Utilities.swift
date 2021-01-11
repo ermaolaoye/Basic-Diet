@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import CryptoKit
 
 struct Server{
     static let url: String = "http://192.168.31.109:5000/api/"
@@ -31,4 +32,16 @@ struct referenceFoods: Decodable{
     
     
     static var unitMap: Dictionary<String, String> = ["calories":"Kcal","vitaminB1":"mg","calcium":"mg","protein":"g","vitaminB2":"mg","magnesium":"mg","fat":"g","niacin":"mg","iron":"mg","carbohydrate":"g","vitaminC":"mg","manganese":"mg","dietaryFiber":"g","vitaminE":"mg","zinc":"mg","vitaminA":"mcg","cholesterol":"mg","copper":"mg","carotene":"mcg","potassium":"mg","phosphorus":"mg","sodium":"mg","selenium":"mcg"]
+}
+
+class TextValidator: ObservableObject {
+    @Published var text = ""
+}
+
+func hashText(string: String) -> String {
+    let inputData = Data(string.utf8)
+    let hashed = SHA256.hash(data: inputData)
+    let outputString = hashed.compactMap { String(format: "%02x", $0) }.joined()
+    
+    return outputString
 }

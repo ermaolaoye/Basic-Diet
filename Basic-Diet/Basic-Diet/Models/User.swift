@@ -57,28 +57,6 @@ struct RegisterUser: Codable{
     var userWeight: Int = 0
     var userHeight: Int = 0
     var userBirthday: String = ""
-    
-    mutating func updateUserName(_ value: String){
-        self.userName = value
-    }
-    mutating func updateUserGender(_ value: String){
-        self.userGender = value
-    }
-    mutating func updatePassword(_ value: String){
-        self.password = value
-    }
-    mutating func updateUserEmail(_ value: String){
-        self.userEmail = value
-    }
-    mutating func updateUserWeight(_ value: Int){
-        self.userWeight = value
-    }
-    mutating func updateUserHeight(_ value: Int){
-        self.userHeight = value
-    }
-    mutating func updateUserBirthday(_ value: String){
-        self.userBirthday = value
-    }
 }
 
 struct JWT: Codable{
@@ -89,6 +67,14 @@ struct JWT: Codable{
 class HttpAuth: ObservableObject {
 
     @Published var authenticated = false
+    @Published var state: State = .ready
+    
+    enum State{
+        case ready
+        case loading
+        case loaded
+        case error
+    }
 
     func postAuth(user: RegisterUser) {
         let url = URL(string: Server.url + "User/addUser")!
@@ -104,10 +90,15 @@ class HttpAuth: ObservableObject {
 
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else { return }
+            guard error == nil else {
+                self.state = .error
+                return
+            }
             let contents = String(data: data, encoding: .ascii)
             if contents?.isEmpty == false {
                 DispatchQueue.main.async {
                     self.authenticated = true
+                    self.state = .loaded
                 }
             }
         }.resume()
