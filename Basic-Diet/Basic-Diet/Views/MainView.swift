@@ -27,15 +27,12 @@ struct MainView: View {
                 }
             }
             Spacer()
-            Button(action: {user.updateCal(newCal: 100)}){
-                Text("Update")
-            }
         }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(user: User.default)
+        MainView(user: User(userGender: "Male", JWT: ""))
     }
 }

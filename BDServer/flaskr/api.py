@@ -223,7 +223,7 @@ def user_register():
         db.execute('''UPDATE Users SET JWT=\"%s\", userCalories=%i WHERE userEmail=\"%s\"''' % (JWT, recCalories, user['userEmail']))
         db.commit()
         # Return JWT
-        return JWT
+        return "JWT:" + JWT
 
 @user.route('/login', methods=('GET','POST'))
 def user_login():

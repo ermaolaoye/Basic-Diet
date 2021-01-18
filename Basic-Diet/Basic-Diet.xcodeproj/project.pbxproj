@@ -11,6 +11,7 @@
 		D23EC4B4259C289F00F49FB1 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EC4B3259C289F00F49FB1 /* ProgressBar.swift */; };
 		D2497D61259B5EF200405766 /* foodPreviewTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2497D60259B5EF200405766 /* foodPreviewTab.swift */; };
 		D2497D69259B60FE00405766 /* caloriesDesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2497D68259B60FE00405766 /* caloriesDesTab.swift */; };
+		D257C27425AC1ADA00AA9400 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D257C27325AC1ADA00AA9400 /* LoginView.swift */; };
 		D25CF9A425A4B64400F8294B /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25CF9A025A4B64400F8294B /* Food.swift */; };
 		D25FDC4D258BD97400399810 /* BasicDietApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25FDC4C258BD97400399810 /* BasicDietApp.swift */; };
 		D25FDC51258BD97600399810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25FDC50258BD97600399810 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		D23EC4B3259C289F00F49FB1 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		D2497D60259B5EF200405766 /* foodPreviewTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodPreviewTab.swift; sourceTree = "<group>"; };
 		D2497D68259B60FE00405766 /* caloriesDesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = caloriesDesTab.swift; sourceTree = "<group>"; };
+		D257C27325AC1ADA00AA9400 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D25CF9A025A4B64400F8294B /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		D25CF9A825A5906400F8294B /* testPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = testPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D25FDC49258BD97400399810 /* Basic-Diet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Basic-Diet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +228,7 @@
 				D282BCCD25A6B625006AF4B6 /* SearchBar.swift */,
 				D28A11B425A649020099F889 /* StatusOverlay.swift */,
 				D28908F425A9F1A50083E681 /* RegisterView.swift */,
+				D257C27325AC1ADA00AA9400 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				D2EBFEF3259B50EA00A3673C /* Colors.swift in Sources */,
 				D282BCCE25A6B625006AF4B6 /* SearchBar.swift in Sources */,
 				D26C8D68259B2D510006C049 /* FoodDescription.swift in Sources */,
+				D257C27425AC1ADA00AA9400 /* LoginView.swift in Sources */,
 				D28D6D4425A406D20031403E /* CircleProgressBar.swift in Sources */,
 				D282BCD325A6E817006AF4B6 /* SearchFood.swift in Sources */,
 				D282BCDB25A6E959006AF4B6 /* FoodList.swift in Sources */,
