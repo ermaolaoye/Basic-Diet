@@ -35,6 +35,6 @@ def create_app(test_config=None):
     db.init_app(app) # setting up the connection with database
 
     from . import api
-    app.register_blueprint(api.bp) # setting up the connection with the api bluprint
+    app.register_blueprint(api.APIblueprint) # setting up the connection with the api bluprint
 
     return app

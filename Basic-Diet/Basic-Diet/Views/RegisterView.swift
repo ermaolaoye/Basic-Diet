@@ -31,10 +31,12 @@ struct RegisterView: View {
     
     @State private var buttonClicked: Bool = false
     
+    @State private var userJWT = UserDefaults.standard.string(forKey: "JWT")
+    
     var body: some View {
         VStack(alignment: .leading){
             if self.manager.authenticated {
-                Text("Register Succeed")
+                Text(UserDefaults.standard.string(forKey: "JWT")!)
             } else {
                 VStack(alignment: .leading){
                     Text("Username")

@@ -17,7 +17,9 @@ struct LoginView: View {
     var body: some View {
         VStack(alignment: .leading){
             if self.manager.authenticated == true{
-                Text("Login Succeed")
+                Text(UserDefaults.standard.string(forKey: "JWT")!)
+            } else if self.manager.state == .wrongPassword{
+                Text("Wrong Password or accounts")
             } else {
                 Text("Email")
                 TextField("Enter ...", text: $userEmail)
@@ -40,15 +42,17 @@ struct LoginView: View {
                         ZStack{
                             RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                                 .accentColor(basicColors.healthyColor)
-                            Text("Register")
+                            Text("Login")
                                 .foregroundColor(basicColors.textColor)
                         }
                         .frame(width: 100.0, height: 40.0)
                         Spacer()
                     }
                 }
+                .disabled(self.userEmail.isEmpty || self.userPassword.isEmpty)
             }
         }
+        .overlay(StatusOverlayLoginUser(model: manager))
     }
 }
 

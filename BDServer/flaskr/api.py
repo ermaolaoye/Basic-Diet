@@ -15,10 +15,10 @@ class NestedBlueprint(object): # Object for creating nested blueprint
         rule = self.prefix + rule
         return self.blueprint.route(rule, **options)
 
-bp = Blueprint('api', __name__, url_prefix='/api') # Setting up for the api blueprint
-food = NestedBlueprint(bp, 'Food') # APIs about foods
-user = NestedBlueprint(bp, 'User') # APIs about users
-record = NestedBlueprint(bp, 'Record') # APIs about records
+APIblueprint = Blueprint('api', __name__, url_prefix='/api') # Setting up for the api blueprint
+food = NestedBlueprint(APIblueprint, 'Food') # APIs about foods
+user = NestedBlueprint(APIblueprint, 'User') # APIs about users
+record = NestedBlueprint(APIblueprint, 'Record') # APIs about records
 
 def query2Json(sql, para, abort400=False, returnNull=False):
     """
@@ -250,7 +250,7 @@ def user_login():
             db.execute('''UPDATE Users SET JWT=\"%s\" WHERE userEmail=\"%s\"''' % (JWT, user['userEmail']))
             db.commit()
             # Return the new JWT
-            return JWT 
+            return "JWT:" + JWT 
         # Return error message when input is incorrect
         else:
             return "WrongInput"
@@ -531,7 +531,4 @@ def del_record():
         db = get_db()
         db.execute(sql)
         db.commit()
-        B
-        B
-        B
         return 'succeed'

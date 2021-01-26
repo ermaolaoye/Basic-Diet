@@ -41,6 +41,7 @@ class UserLoginAuth: ObservableObject {
         case loading
         case loaded
         case error
+        case wrongPassword
     }
     
     func postAuth(user: LoginUser) {
@@ -63,11 +64,16 @@ class UserLoginAuth: ObservableObject {
             }
             
             let contents = String(data: data, encoding: .ascii)
-            if contents?.isEmpty == false {
+            if contents?.isEmpty == false || contents?.contains("JWT:") == true {
                 DispatchQueue.main.async {
+                    let startRange = contents?.range(of: "JWT:")!
+                    UserDefaults.standard.set(contents![(startRange?.upperBound...)!], forKey: "JWT")
                     self.authenticated = true
                     self.state = .loaded
                 }
+            } else if contents?.isEmpty == false || contents?.contains("WrongInput") == true {
+                self.authenticated = false
+                self.state = .wrongPassword
             }
         }.resume()
     }
@@ -101,7 +107,6 @@ class HttpAuth: ObservableObject {
         case loading
         case loaded
         case error
-        case wrongPassword
     }
 
     func postAuth(user: RegisterUser) {
@@ -123,11 +128,10 @@ class HttpAuth: ObservableObject {
                 return
             }
             let contents = String(data: data, encoding: .ascii)
-            if contents?.isEmpty == false || contents?.contains("WrongInput") == true {
-                self.authenticated = false
-                self.state = .wrongPassword
-            } else {
+            if contents?.isEmpty == false || contents?.contains("JWT:") == true {
                 DispatchQueue.main.async {
+                    let startRange = contents?.range(of: "JWT:")!
+                    UserDefaults.standard.set(contents![(startRange?.upperBound...)!], forKey: "JWT")
                     self.authenticated = true
                     self.state = .loaded
                 }

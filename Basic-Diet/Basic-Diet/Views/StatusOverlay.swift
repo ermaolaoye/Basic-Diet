@@ -75,6 +75,30 @@ struct StatusOverlayRegisterUser: View{
                 .padding()
                 .background(Color.yellow)
             )
-        }
     }
+}
+}
+
+struct StatusOverlayLoginUser: View{
+    @ObservedObject var model: UserLoginAuth
+    var body: some View{
+        switch model.state{
+        case .ready:
+            return AnyView(EmptyView())
+        case .loading:
+            return AnyView(
+                Text("Loading")
+            )
+        case .loaded:
+            return AnyView(EmptyView())
+        case .error:
+            return AnyView(
+                Text("Error Happended Please Retry")
+                .padding()
+                .background(Color.yellow)
+            )
+        case .wrongPassword:
+            return AnyView(EmptyView())
+    }
+}
 }
