@@ -1,6 +1,6 @@
 {
-  "userJWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI3IiwiaWF0IjoiMTYwNzg3NzA5Ny44MzE2MzYifQ.dnCzsmCzQ8vQLOlYhtaVgMxlwiV7mRdaq8lD41uY5v8",
-  "userID": 7,
+  "userJWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiIxIiwiaWF0IjoiMTYxMjg2ODM0Mi41NzEyODkifQ.h83rST060ZT3rMQ774xf2TVerC1mSB6-BAt8-jGh38E",
+  "userID": 1,
   "foodID": 4,
-  "rating": 9
+  "rating": 10
 }

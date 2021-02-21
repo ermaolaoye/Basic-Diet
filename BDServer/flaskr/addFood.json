@@ -1,5 +1,8 @@
 {
   "userID": 1,
   "userJWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiIxIiwiaWF0IjoiMTYxMjg2ODM0Mi41NzEyODkifQ.h83rST060ZT3rMQ774xf2TVerC1mSB6-BAt8-jGh38E",
-  "foodID": 4
+  "foodName": "testfood",
+  "calories": 1000,
+  "nutriSelect": "carbohydrate, fat, protein",
+  "nutriVal": "100, 200, 300"
 }

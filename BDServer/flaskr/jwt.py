@@ -4,13 +4,17 @@ import hmac
 import time
 
 def b64encode(s: bytes) -> str: # Base64 encoding
+    # Encode Input
     s_bin = urlsafe_b64encode(s)
-    s_bin = s_bin.replace(b'=', b'')
-    return s_bin.decode('ascii')
+    s_bin = s_bin.replace(b'=', b'') 
+    # Return the encoded content in ASCII character set
+    return s_bin.decode('ascii') 
 
 def b64decode(s: str) -> bytes: # Base64 decoding
-    s_bin = s.encode('ascii')
+    # Encode Input
+    s_bin = s.encode('ascii') 
     s_bin += b'=' * (4 - len(s_bin) % 4)
+    # Return the content original ocntent
     return urlsafe_b64decode(s_bin)
 
 # Secret for encrypting
@@ -41,6 +45,8 @@ def get_userJWT(userID):
     iat:        unix timestamp form time
 
     """
+    # Set payload
     payload = {"userID":str(userID),"iat":str(time.time())}
+    # Generate JWT
     userJWT = JWTgenerator(payload)
     return userJWT

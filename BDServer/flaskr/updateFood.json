@@ -1,6 +1,6 @@
 {
-  "userID": 9,
-  "userJWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI5IiwiaWF0IjoiMTYwNzk2NzgxOC44MTAyNTgifQ.n6ox-XHCFw6Cc2DjBJ-5QQFH8ZfgLGvljjH_MV-nceY",
-  "foodID": 1451,
-  "updatePara": "calories = 1000"
+  "userID": 1,
+  "userJWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiIxIiwiaWF0IjoiMTYxMjg2ODM0Mi41NzEyODkifQ.h83rST060ZT3rMQ774xf2TVerC1mSB6-BAt8-jGh38E",
+  "foodID": 1454,
+  "updatePara": "foodNameCHN='updateFood', calories = 1000"
 }

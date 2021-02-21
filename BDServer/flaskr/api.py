@@ -7,10 +7,16 @@ import json
 
 class NestedBlueprint(object): # Object for creating nested blueprint
     def __init__(self, blueprint, prefix):
+        '''
+        Parameters:
+        blueprint  The parent blueprint
+        prefix     The prefix for the nested blueprint
+        '''
         super(NestedBlueprint, self).__init__()
         self.blueprint = blueprint
         self.prefix = '/' + prefix
 
+    # Route nested blueprint
     def route(self, rule, **options):
         rule = self.prefix + rule
         return self.blueprint.route(rule, **options)
@@ -20,7 +26,7 @@ food = NestedBlueprint(APIblueprint, 'Food') # APIs about foods
 user = NestedBlueprint(APIblueprint, 'User') # APIs about users
 record = NestedBlueprint(APIblueprint, 'Record') # APIs about records
 
-def query2Json(sql, para, abort400=False, returnNull=False):
+def query2Json(sql, para, abort400=False, returnNull=False): # Query database and return json
     """
     Parameters:
     sql         str, The sql statement
@@ -31,11 +37,11 @@ def query2Json(sql, para, abort400=False, returnNull=False):
     """
     db = get_db()
     cursor = db.execute(sql % para)
-    dictData = [dict(row) for row in cursor.fetchall()]
-    if abort400 == True:
+    dictData = [dict(row) for row in cursor.fetchall()] # Translate the data from cursor to python dictionary
+    if abort400 == True: # Abort HTTP400 Error if find empty
         if not dictData: # Empty dictionary evaluate to False in python
             abort(400)
-    if returnNull == True:
+    if returnNull == True: # Return -1 if find empty
         if not dictData:
             return -1
     return json.dumps(dictData)
@@ -69,6 +75,7 @@ def JWTverification(JWT, userID):
         return True
     else:
         return False
+
 def getUserAuthority(userID) -> str:
     """
     Parameters:
@@ -82,7 +89,7 @@ def getUserAuthority(userID) -> str:
 
 # - Foods
 @food.route('/description/<int:food_id>', methods=('GET', 'POST'))
-def get_food_description(food_id=1):
+def get_food_description(food_id=1): # by default is 1
     """
     Parameter:
     food_id     The id of the description of the food that client is looking for
@@ -90,7 +97,7 @@ def get_food_description(food_id=1):
     sql = """SELECT foodNameCHN, barcode, id, calories, carbohydrate, fat, protein, cholesterol, sodium, dietaryFiber, vitaminA, carotene, vitaminE, vitaminB1, vitaminB2, vitaminC, niacin, phosphorus, potassium, magnesium, calcium, iron, zinc, selenium, copper, manganese, addUser, imageID, type
     FROM Foods WHERE id = %i"""
     para = food_id
-    json = query2Json(sql=sql, para=para, abort400=True)
+    json = query2Json(sql=sql, para=para, abort400=True) # Get json from sql query
     return json
 
 @food.route('/list/<string:user_input>', methods=('GET','POST'))
@@ -99,8 +106,8 @@ def get_list_food(user_input):
     Parameter:
     user_input  The user input of the name of food they're looking for
     """
-    sql = """SELECT foodNameCHN, id, imageID FROM Foods WHERE foodNameCHN LIKE '%s'"""
-    para = "%" + user_input + "%"
+    sql = """SELECT foodNameCHN, id, imageID FROM Foods WHERE foodNameCHN LIKE '%s'""" # Using LIKE instead of =
+    para = "%" + user_input + "%" # Utilize fuzzy search in sql
     json = query2Json(sql=sql, para=para, abort400=True)
     return json
 
@@ -127,7 +134,7 @@ def add_food():
         # Insert into requests tables
         if userAuthority == 'citizen' or userAuthority == 'manager':
             content = 'Add Food Named:' + food['foodName']
-            sql = '''INSERT INTO Requests(userID, content, sqlCode) VALUES(%i, \"%s\", \"%s\")''' % (food['userID'], content, sqlCode)
+            sql = '''INSERT INTO Requests(userID, content, sqlCode) VALUES(%i, \"%s\", \'%s\')''' % (food['userID'], content, sqlCode)
             db.execute(sql)
             db.commit()
             return 'succeedRequested'
@@ -146,6 +153,7 @@ def update_food():
     userJWT     JWT stored in the frontend
     foodID      ID of the food user wants to edit
     updatePara  Description of the update
+                    strings needs to be surrounded by single quote '
     """
     if request.method == 'POST':
         food = request.json
@@ -181,6 +189,7 @@ def del_food():
         # JWT Verification
         if not JWTverification(JWT = str(food['userJWT']), userID = int(food['userID'])):
             abort(401)
+        # Verify that user can only delete their own food
         db = get_db()
         cursor = db.execute('''SELECT addUser FROM Foods WHERE id = %i''' % food['foodID'])
         dictData = [row[0] for row in cursor.fetchall()]
@@ -206,8 +215,8 @@ def user_register():
     userHeight  int, A integer value of the user's height
     userBirthdaystr, A string value of user's birthday in format yyyy-mm-dd
     """
-    if request.method == 'POST':
-        user = request.json
+    if request.method == 'POST': # Check HTTP Method
+        user = request.json # set the request json as user 
         # Insert the user information to database
         sql = '''INSERT INTO Users(userName, userGender, userEmail, userWeight, userHeight, userPassword, userBirthday) VALUES(\"%s\", \"%s\", \"%s\", %i, %i,\"%s\", \"%s\")''' % (user['userName'], user['userGender'], user['userEmail'], user['userWeight'], user['userHeight'],user['password'], user['userBirthday'])
         db = get_db()
@@ -243,7 +252,7 @@ def user_login():
         input_userPassword = str(user['password'])
         # When input password is the same as the password stored in the database
         if db_userPassword == input_userPassword:
-            # Get corresponding userID and update user's JWT
+            # Get corresponding userID and update user's JWT with userEmail
             para = "userEmail == \"%s\"" % user['userEmail']
             JWT = get_userJWT(getUserID(para = para))
             db.commit()
@@ -251,7 +260,7 @@ def user_login():
             db.commit()
             # Return the new JWT
             return "JWT:" + JWT 
-        # Return error message when input is incorrect
+        # Return error message when password input is incorrect
         else:
             return "WrongInput"
 
@@ -315,10 +324,10 @@ def update_user_password():
         db.commit()
         db.execute('''UPDATE Users SET userPassword=\"%s\" WHERE userID=%i''' % (user['newPassword'], user['userID']))
         db.commit()
-        return 'succeed'
+        return 'Succeed'
 
 @user.route('/ratingFood', methods=('GET','POST'))
-def addRating():
+def add_rating():
     """
     JSON Requirement
     userJWT     str, JWT stored in the frontend
@@ -393,6 +402,7 @@ def del_user():
     """
     if request.method == 'POST':
         user = request.json
+        # Verify that user with userID inputed exist in the database
         db = get_db()
         cursor = db.execute('''SELECT userID FROM Users WHERE userID = %i''' % user['userID'])
         dictData = [row[0] for row in cursor.fetchall()]
@@ -421,7 +431,7 @@ def del_user():
 
 # - Records
 @record.route('/addRecord', methods=('GET','POST'))
-def record_register():
+def add_record():
     """
     JSON Requirement
     userID      int, ID of the user
@@ -437,10 +447,9 @@ def record_register():
             abort(401)
         # Get current time
         currentTime = datetime.now()
-        str_currentTime = currentTime.strftime("%Y/%m/%d %H:%M:%S") # Format current time into string
+        str_currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S") # Format current time into string
         # Insert the data into the database
         sql = '''INSERT INTO Records(userID, foodID, date, quantity, unit) VALUES(%i, %i, \"%s\", %f, \"%s\")''' % (record['userID'], record['foodID'], str_currentTime, record['quantity'], record['unit'])
-        # Return Succeed
         db = get_db()
         db.execute(sql)
         db.commit()
@@ -477,11 +486,13 @@ def get_record_description():
             # Week Start Date and Week End Date Calculation
             startDate = record['rangeVal']
             endDate = str(str(startDate[0:8]) + str(int(startDate[8:10])+6))
+            print(endDate)
             # Query the database
             sql = """SELECT recordID, foodID, quantity, unit, date FROM Records WHERE date(date) BETWEEN date(\"%s\") AND date(\"%s\")"""
             para = (startDate, endDate)
             json = query2Json(sql=sql, para=para, abort400=True)
             return json
+        # When requesting for one specific record
         elif record['rangeType'] == 'ID':
             sql = """SELECT recordID, foodID, quantity, unit, date FROM Records WHERE recordID = %i"""
             para = int(record['rangeVal'])
@@ -504,8 +515,6 @@ def update_record():
     if request.method == 'POST':
         record = request.json
         # JWT verification
-        if not JWTverification(JWT=record['userJWT'], userID=record['userID']):
-            abort(401)
         # Update Records
         sql = '''UPDATE Records SET date=\"%s\", quantity=%f, unit=\"%s\" WHERE recordID = %i AND userID = %i''' % (record['newDate'], record['newQuantity'], record['newUnit'], record['recordID'], record['userID']) # make sure user can only update their own record
         db=get_db()

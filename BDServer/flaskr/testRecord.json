@@ -1,6 +1,6 @@
 {
-  "userID": 7,
-  "userJWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI3IiwiaWF0IjoiMTYwNzg3NzA5Ny44MzE2MzYifQ.dnCzsmCzQ8vQLOlYhtaVgMxlwiV7mRdaq8lD41uY5v8",
+  "userID": 1,
+  "userJWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI2OCIsImlhdCI6IjE2MTM3ODc3MTguMTk5MzMyIn0.ny73ramDiFLBNEGoVO7TGoZhBfDJYzqYt_Uyn-LipmI",
   "foodID": 1,
   "quantity": 1.0,
   "unit": "slice"

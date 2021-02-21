@@ -1,7 +1,7 @@
 {
-  "userJWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI3IiwiaWF0IjoiMTYwNzg3NzA5Ny44MzE2MzYifQ.dnCzsmCzQ8vQLOlYhtaVgMxlwiV7mRdaq8lD41uY5v8",
-  "userID": 7,
-  "userName": "UpdateName",
+  "userJWT": "incorrect JwT",
+  "userID": 1,
+  "userName": "newName",
   "userGender": "Female",
   "userEmail": "UpdateEmail@gmail.com"
 }

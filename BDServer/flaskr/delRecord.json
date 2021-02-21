@@ -1,6 +1,5 @@
 {
   "userID": 1,
   "userJWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI2OCIsImlhdCI6IjE2MTM3ODc3MTguMTk5MzMyIn0.ny73ramDiFLBNEGoVO7TGoZhBfDJYzqYt_Uyn-LipmI",
-  "rangeType": "Month",
-  "rangeVal": "2021-02"
+  "recordID": 1
 }
