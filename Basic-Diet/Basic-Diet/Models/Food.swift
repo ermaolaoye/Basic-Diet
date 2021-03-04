@@ -7,6 +7,8 @@
 import Combine
 import SwiftUI
 
+// MARK: - Food Model
+
 enum FoodType{
     case meat
     case staple
@@ -31,7 +33,7 @@ struct foodImage {
     }
 }
 
-// MARK: - Food Model
+// MARK: - Food View Model
 class FoodModel: ObservableObject{
     @Published var food = referenceFoods.loadingFood
     @Published var state: State = State.ready

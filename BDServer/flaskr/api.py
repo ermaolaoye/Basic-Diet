@@ -515,6 +515,8 @@ def update_record():
     if request.method == 'POST':
         record = request.json
         # JWT verification
+        if not JWTverification(JWT=record['userJWT'], userID=record['userID']):
+            abort(401)
         # Update Records
         sql = '''UPDATE Records SET date=\"%s\", quantity=%f, unit=\"%s\" WHERE recordID = %i AND userID = %i''' % (record['newDate'], record['newQuantity'], record['newUnit'], record['recordID'], record['userID']) # make sure user can only update their own record
         db=get_db()

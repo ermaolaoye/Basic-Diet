@@ -11,7 +11,7 @@ struct caloriesDesTab: View {
     var food: Food
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 10) // Background rectangle
                 .fill(basicColors.basicGradient)
                 .frame(height: 200, alignment: .center)
                 .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.2), radius: 10, x:0.0, y: 9.0)
@@ -24,7 +24,7 @@ struct caloriesDesTab: View {
                     Spacer()
                 }.padding()
                 VStack{
-                    HStack {
+                    HStack { // Amount of Calories
                         Text(String(food.calories))
                             .font(.largeTitle)
                             .fontWeight(.semibold)
@@ -38,12 +38,12 @@ struct caloriesDesTab: View {
                         .foregroundColor(basicColors.captionColor)
                     Spacer()
                     if food.type != nil {
-                        VStack {
+                        VStack { // Colorful healthy indicator
                             RoundedRectangle(cornerRadius: 10)
                                 .foregroundColor(basicColors.healthyColor)
                                 .padding(.horizontal)
-                                .frame(height:15) // 根据user剩余卡路里改颜色<++>
-                            
+                                .frame(height:15) //Change Color by user caloreis<++>
+                            // Comparasion words
                             Text("About " + getComparisionFood(calories: Int(food.calories), type: correspondingType(type: food.type)))
                                 .foregroundColor(basicColors.captionColor)
                         }.offset(y: 10)
@@ -92,19 +92,19 @@ func getComparisionFood(calories: Int, type: FoodType) -> String{
     var compareUnit: String
     var foodName: String
     switch type {
-    case FoodType.meat:
+    case FoodType.meat: // Compare with chickenbreast if food type is meat
         compareCalories = Int(referenceFoods.chickenBreast.calories)
         compareUnit = "slice"
         foodName = referenceFoods.chickenBreast.foodNameCHN
-    case FoodType.beverage:
+    case FoodType.beverage: // Compare with coke if food type is beversage
         compareCalories = Int(referenceFoods.cola.calories)
         compareUnit = "cup"
         foodName = referenceFoods.cola.foodNameCHN
-    case FoodType.desert:
+    case FoodType.desert: // Compare with oreo if food type is desert
         compareCalories = Int(referenceFoods.oreo.calories)
         compareUnit = "slice"
         foodName = referenceFoods.oreo.foodNameCHN
-    case FoodType.staple:
+    case FoodType.staple: // Compare with rice if food type is staple
         compareCalories = Int(referenceFoods.rice.calories)
         compareUnit = "bowl"
         foodName = referenceFoods.rice.foodNameCHN

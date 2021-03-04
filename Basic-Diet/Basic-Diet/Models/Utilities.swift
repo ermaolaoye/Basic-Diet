@@ -10,7 +10,7 @@ import SwiftUI
 import CryptoKit
 
 struct Server{
-    static let url: String = "http://192.168.31.109:5000/api/"
+    static let url: String = "http://127.0.0.1:5000/api/"
 }
 
 struct referenceFoods: Decodable{
@@ -30,7 +30,7 @@ struct referenceFoods: Decodable{
     static var loadingFood = Food(foodNameCHN: "", id: 0, calories: 0, carbohydrate: 0, fat: 0, protein: 0, cholesterol: 0, sodium: 0, dietaryFiber: 0, vitaminA: 0, carotene: 0, vitaminE: 0, vitaminB1: 0, vitaminB2: 0, vitaminC: 0, niacin: 0, phosphorus: 0, potassium: 0, magnesium: 0, calcium: 0, iron: 0, zinc: 0, selenium: 0, copper: 0, manganese: 0, imageID: -1, type: -1)
     static var loadingSearchFood = SearchFood(foodNameCHN: "", id: 0, imageID: -1)
     
-    
+    // default unitMap
     static var unitMap: Dictionary<String, String> = ["calories":"Kcal","vitaminB1":"mg","calcium":"mg","protein":"g","vitaminB2":"mg","magnesium":"mg","fat":"g","niacin":"mg","iron":"mg","carbohydrate":"g","vitaminC":"mg","manganese":"mg","dietaryFiber":"g","vitaminE":"mg","zinc":"mg","vitaminA":"mcg","cholesterol":"mg","copper":"mg","carotene":"mcg","potassium":"mg","phosphorus":"mg","sodium":"mg","selenium":"mcg"]
 }
 

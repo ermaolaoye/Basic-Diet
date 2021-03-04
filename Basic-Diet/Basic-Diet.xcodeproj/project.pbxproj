@@ -29,8 +29,8 @@
 		D28A11B525A649020099F889 /* StatusOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A11B425A649020099F889 /* StatusOverlay.swift */; };
 		D28D6D3F25A4068D0031403E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D3E25A4068D0031403E /* MainView.swift */; };
 		D28D6D4425A406D20031403E /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D4325A406D20031403E /* CircleProgressBar.swift */; };
-		D28D6D4925A420260031403E /* ActivityRingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D4825A420260031403E /* ActivityRingProgressBar.swift */; };
 		D28D6D4E25A42C2F0031403E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D6D4D25A42C2F0031403E /* Utilities.swift */; };
+		D2AB4ED025F0B80700EA4BBE /* ActivityRingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB4ECF25F0B80700EA4BBE /* ActivityRingProgressBar.swift */; };
 		D2EBFEF3259B50EA00A3673C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EBFEF2259B50EA00A3673C /* Colors.swift */; };
 		D2F0CB23259E1B78004D1284 /* NutritionProportionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0CB22259E1B78004D1284 /* NutritionProportionBar.swift */; };
 /* End PBXBuildFile section */
@@ -83,8 +83,8 @@
 		D28A11B425A649020099F889 /* StatusOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOverlay.swift; sourceTree = "<group>"; };
 		D28D6D3E25A4068D0031403E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D28D6D4325A406D20031403E /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
-		D28D6D4825A420260031403E /* ActivityRingProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRingProgressBar.swift; sourceTree = "<group>"; };
 		D28D6D4D25A42C2F0031403E /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D2AB4ECF25F0B80700EA4BBE /* ActivityRingProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityRingProgressBar.swift; sourceTree = "<group>"; };
 		D2EBFEF2259B50EA00A3673C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		D2F0CB22259E1B78004D1284 /* NutritionProportionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionProportionBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,7 +120,7 @@
 				D23EC4B3259C289F00F49FB1 /* ProgressBar.swift */,
 				D2F0CB22259E1B78004D1284 /* NutritionProportionBar.swift */,
 				D28D6D4325A406D20031403E /* CircleProgressBar.swift */,
-				D28D6D4825A420260031403E /* ActivityRingProgressBar.swift */,
+				D2AB4ECF25F0B80700EA4BBE /* ActivityRingProgressBar.swift */,
 			);
 			path = SubTabs;
 			sourceTree = "<group>";
@@ -396,11 +396,11 @@
 				D25FDCA0259B09F200399810 /* ViewModifiers.swift in Sources */,
 				D2497D61259B5EF200405766 /* foodPreviewTab.swift in Sources */,
 				D25CF9A425A4B64400F8294B /* Food.swift in Sources */,
+				D2AB4ED025F0B80700EA4BBE /* ActivityRingProgressBar.swift in Sources */,
 				D23EC4B4259C289F00F49FB1 /* ProgressBar.swift in Sources */,
 				D25FDC7C258BDC6F00399810 /* User.swift in Sources */,
 				D28D6D4E25A42C2F0031403E /* Utilities.swift in Sources */,
 				D25FDC4D258BD97400399810 /* BasicDietApp.swift in Sources */,
-				D28D6D4925A420260031403E /* ActivityRingProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

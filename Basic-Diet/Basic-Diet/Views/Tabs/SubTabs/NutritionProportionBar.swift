@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct NutritionProportionBar: View {
-    var nutritionName: String
-    var nutritionVal: Float
-    var nutritionUnit: String
+    var nutritionName: String // Name of nutrition
+    var nutritionVal: Float // Value of nutrition
+    var nutritionUnit: String // Unit of nutrition
     var body: some View {
         VStack {
             HStack {
-                Text(nutritionName)
+                Text(nutritionName) // Name of nutrition
                     .font(.callout)
                     .fontWeight(.semibold)
                     .foregroundColor(basicColors.textColor)
                     
                 Spacer()
-                Text(String(nutritionVal) + nutritionUnit)
+                Text(String(nutritionVal) + nutritionUnit) // Value + Unit
                     .font(.callout)
                     .fontWeight(.semibold)
                     .foregroundColor(basicColors.textColor)
             }
-            ProgressBar(value: Float(getProportion(nutrition: nutritionVal, unit: nutritionUnit))).frame(height: 15)
+            ProgressBar(value: Float(getProportion(nutrition: nutritionVal, unit: nutritionUnit))).frame(height: 15) // Progress Bar
         }
     }
 }
@@ -36,6 +36,7 @@ struct NutritionProportionBar_Previews: PreviewProvider {
     }
 }
 
+// proportion calculateor
 func getProportion(nutrition: Float, unit: String) -> CGFloat{
     switch unit{
         case "g":

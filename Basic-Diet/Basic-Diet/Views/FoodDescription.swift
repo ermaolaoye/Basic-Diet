@@ -38,6 +38,6 @@ struct FoodInfo: View {
 
 struct FoodInfo_Previews: PreviewProvider {
     static var previews: some View {
-        FoodInfo(food: FoodModel(foodID: 30))
+        FoodInfo(food: FoodModel(foodID: 2))
     }
 }

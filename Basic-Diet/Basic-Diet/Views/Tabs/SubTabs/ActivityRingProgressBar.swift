@@ -112,6 +112,7 @@ struct PercentageRing: View {
             }
         }
     }
+
     private func getEndCircleLocation(frame: CGSize) -> (CGFloat, CGFloat) {
         let angleOfEndInRadians: Double = relativePercentageAngle.toRadians()
         let offsetRadius = min(frame.width, frame.height) / 2
