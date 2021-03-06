@@ -58,13 +58,13 @@ struct FoodPreviewTabSimple: View{
     var food: SearchFood
     var body: some View{
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 10) // Background Rectangle
                 .fill(basicColors.basicGradient)
                 .frame(height: 110, alignment: .center)
                 .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.2), radius: 10, x:0.0, y: 9.0)
             
             HStack{
-                ZStack {
+                ZStack { // Food Image
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(.white)
                     foodImage(imageID: food.imageID).image
@@ -75,7 +75,7 @@ struct FoodPreviewTabSimple: View{
                 .frame(width: 90, height: 90)
                 .offset(x:-10)
                 VStack(alignment: .leading) {
-                    Text(food.foodNameCHN)
+                    Text(food.foodNameCHN) // Food Name
                         .font(.system(size: 20))
                         .fontWeight(.semibold)
                         .foregroundColor(basicColors.textColor)
@@ -91,6 +91,6 @@ struct FoodPreviewTabSimple: View{
 
 struct foodPreviewTab_Previews: PreviewProvider {
     static var previews: some View {
-        foodPreviewTab(food: referenceFoods.chickenBreast)
+        FoodPreviewTabSimple(food: SearchFood(foodNameCHN: "Test", id: 1, imageID: -1))
     }
 }

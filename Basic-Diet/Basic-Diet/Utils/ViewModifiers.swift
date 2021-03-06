@@ -1,5 +1,5 @@
 //
-//  httpRequest.swift
+//  ViewModifiers.swift
 //  Basic-Diet
 //
 //  Created by 黄子航 on 2020/12/29.
@@ -53,4 +53,18 @@ extension UINavigationController: UIGestureRecognizerDelegate { // Add Swipe Ges
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
     }
+}
+
+extension View {
+  @ViewBuilder
+  func `if`<Transform: View>(
+    _ condition: Bool,
+    transform: (Self) -> Transform
+  ) -> some View {
+    if condition {
+      transform(self)
+    } else {
+      self
+    }
+  }
 }

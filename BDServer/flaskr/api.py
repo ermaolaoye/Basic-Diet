@@ -142,7 +142,7 @@ def add_food():
         elif userAuthority == 'mayor':
             db.execute(sqlCode)
             db.commit()
-            return 'succeed'
+            return 'Succeed'
         else:
             abort(400)
 @food.route('/update', methods=('GET', 'POST'))
@@ -172,7 +172,7 @@ def update_food():
         elif userAuthority == 'mayor':
             db.execute(sqlCode)
             db.commit()
-            return 'succeed'
+            return 'Succeed'
         else:
             abort(400)
 
@@ -197,7 +197,7 @@ def del_food():
             sql = '''DELETE FROM Foods WHERE id=%i AND addUser=%i''' % (food['foodID'], food['userID'])
             db.execute(sql)
             db.commit()
-            return 'succeed'
+            return 'Succeed'
         else:
             abort(401)
 
@@ -231,8 +231,12 @@ def user_register():
         db.commit()
         db.execute('''UPDATE Users SET JWT=\"%s\", userCalories=%i WHERE userEmail=\"%s\"''' % (JWT, recCalories, user['userEmail']))
         db.commit()
+        newSql = '''SELECT userID FROM Users WHERE userEmail=\"%s\"''' % (user['userEmail'])
+        cursor = db.execute(newSql)
+        dictData = [row[0] for row in cursor.fetchall()]
+        db_userID = int(dictData[0])
         # Return JWT
-        return "JWT:" + JWT
+        return "JWT:" + JWT + ";ID:" + str(db_userID)
 
 @user.route('/login', methods=('GET','POST'))
 def user_login():
@@ -248,8 +252,12 @@ def user_login():
         db = get_db()
         cursor = db.execute(sql)
         dictData = [row[0] for row in cursor.fetchall()]
-        db_userPassword = str(dictData[0])
-        input_userPassword = str(user['password'])
+        if len(dictData) > 0:
+            db_userPassword = str(dictData[0])
+            input_userPassword = str(user['password'])
+        # Return Wrong Input if password is not found
+        else:
+            return "WrongInput"
         # When input password is the same as the password stored in the database
         if db_userPassword == input_userPassword:
             # Get corresponding userID and update user's JWT with userEmail
@@ -258,11 +266,12 @@ def user_login():
             db.commit()
             db.execute('''UPDATE Users SET JWT=\"%s\" WHERE userEmail=\"%s\"''' % (JWT, user['userEmail']))
             db.commit()
+            newSql = '''SELECT userID FROM Users WHERE userEmail=\"%s\"''' % (user['userEmail'])
+            cursor = db.execute(newSql)
+            dictData = [row[0] for row in cursor.fetchall()]
+            db_userID = int(dictData[0])
             # Return the new JWT
-            return "JWT:" + JWT 
-        # Return error message when password input is incorrect
-        else:
-            return "WrongInput"
+            return "JWT:" + JWT + ";ID:" + str(db_userID)
 
 @user.route('/description', methods=('GET','POST'))
 def get_user_description():
@@ -290,15 +299,25 @@ def update_user_profile():
     userName    str, New name of the user
     userGender  str, New gender of the user
     userEmail   str, New email of the user
+    userWeight  int. New Weight of the user
+    userHeight  int, New Height of the user
     """
     if request.method == 'POST':
         user = request.json
         # JWT Verification
         if not JWTverification(JWT=user['userJWT'], userID=user['userID']):
             abort(401)
-        # Update User Profile
-        sql = '''UPDATE Users SET userName=\"%s\", userGender = \"%s\", userEmail=\"%s\" WHERE userID=%i''' % (user['userName'], user['userGender'], user['userEmail'], user['userID'])
+
+        birthdaySql = """SELECT userBirthday FROM Users WHERE userID=%i""" % user['userID']
         db = get_db()
+        cursor = db.execute(birthdaySql)
+        dictData = [row[0] for row in cursor.fetchall()]
+        db_userBirthday = str(dictData[0])
+        db.commit()
+        # Get user recommend calories
+        recCalories = getUserRecCalories(int(user['userWeight']),int(user['userHeight']),int(getUserAge(db_userBirthday)),user['userGender'])
+        # Update User Profile
+        sql = '''UPDATE Users SET userName=\"%s\", userGender = \"%s\", userEmail=\"%s\" , userWeight=%i, userHeight=%i, userCalories=%i WHERE userID=%i''' % (user['userName'], user['userGender'], user['userEmail'], user['userWeight'], user['userHeight'], recCalories, user['userID'])
         db.execute(sql)
         db.commit()
         return "Succeed"
@@ -427,7 +446,7 @@ def del_user():
         sql = '''DELETE From Users WHERE userID = %i''' % user['userID']
         db.execute(sql)
         db.commit()
-        return 'succeed'
+        return 'Succeed'
 
 # - Records
 @record.route('/addRecord', methods=('GET','POST'))

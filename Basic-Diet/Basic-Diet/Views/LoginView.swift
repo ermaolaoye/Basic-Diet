@@ -13,14 +13,18 @@ struct LoginView: View {
     
     @State var buttonClicked: Bool = false
     
-    @ObservedObject var manager = UserLoginAuth()
+    @ObservedObject var manager = UserLoginManager()
     var body: some View {
         VStack(alignment: .leading){
             if self.manager.authenticated == true{
-                Text(UserDefaults.standard.string(forKey: "JWT")!)
-            } else if self.manager.state == .wrongPassword{
-                Text("Wrong Password or accounts")
+                Text(UserDefaults.standard.string(forKey: UserDefaultKeys.User.JWT)!)
+                Spacer()
+                Text(String(UserDefaults.standard.integer(forKey: UserDefaultKeys.User.userID)))
             } else {
+                if self.manager.state == .wrongPassword{
+                    // Display warning if login failed
+                    Text("Wrong Password or accounts")
+                }
                 Text("Email")
                 TextField("Enter ...", text: $userEmail)
                     .textFieldStyle(RoundedBorderTextFieldStyle())

@@ -12,7 +12,7 @@ struct BasicDietApp: App {
     var server = Server()
     var body: some Scene {
         WindowGroup {
-            foodPreviewTab(food: referenceFoods.chickenBreast)
+            MainView()
         }
     }
 }

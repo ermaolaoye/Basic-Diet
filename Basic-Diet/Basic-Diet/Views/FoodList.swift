@@ -12,14 +12,15 @@ struct FoodList: View {
     var body: some View {
         ScrollView {
             ForEach(foods.foods){ food in
+                // Destination FoodInfo View
                     NavigationLink(destination: FoodInfo(food: FoodModel(foodID: food.id))){
-                        FoodPreviewTabSimple(food: food)
+                        FoodPreviewTabSimple(food: food) // Each Food's preview tab
                             
                     }
                 }
-                .overlay(StatusOverlaySearchFood(model: foods))
+                .overlay(StatusOverlaySearchFood(model: foods)) // Overlay views
                 .onAppear{
-                    self.foods.loadIfNeeded()
+                    self.foods.loadIfNeeded() // Load the content
                     
                 }
         }
@@ -30,6 +31,6 @@ struct FoodList: View {
 
 struct FoodList_Previews: PreviewProvider {
     static var previews: some View {
-        FoodList(foods: SearchFoodModel(searchContent: "1"))
+        FoodList(foods: SearchFoodModel(searchContent: "面条"))
     }
 }

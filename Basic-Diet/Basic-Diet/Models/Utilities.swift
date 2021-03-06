@@ -10,7 +10,7 @@ import SwiftUI
 import CryptoKit
 
 struct Server{
-    static let url: String = "http://127.0.0.1:5000/api/"
+    static let url: String = "http://192.168.31.109:5000/api/"
 }
 
 struct referenceFoods: Decodable{
@@ -39,9 +39,9 @@ class TextValidator: ObservableObject {
 }
 
 func hashText(string: String) -> String {
-    let inputData = Data(string.utf8)
-    let hashed = SHA256.hash(data: inputData)
-    let outputString = hashed.compactMap { String(format: "%02x", $0) }.joined()
+    let inputData = Data(string.utf8) // Encode the string using utf8 format
+    let hashed = SHA256.hash(data: inputData) // Use SHA256 hash algorithm to hash the value
+    let outputString = hashed.compactMap { String(format: "%02x", $0) }.joined() // Returns an array containing the non-nil results of calling the given transformation with each element of this sequence and then join the array to form a string
     
     return outputString
 }

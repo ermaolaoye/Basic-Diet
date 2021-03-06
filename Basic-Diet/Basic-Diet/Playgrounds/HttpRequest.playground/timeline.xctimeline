@@ -2,5 +2,11 @@
 <Timeline
    version = "3.0">
    <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/huangzihang/SynologyDrive/Developer/A-Level/Project/Basic-Diet/Basic-Diet/Basic-Diet/Playgrounds/HttpRequest.playground#CharacterRangeLen=24&amp;CharacterRangeLoc=424&amp;EndingColumnNumber=0&amp;EndingLineNumber=22&amp;StartingColumnNumber=0&amp;StartingLineNumber=21&amp;Timestamp=636726987.6233341"
+         lockedSize = "{175, 50}"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>
