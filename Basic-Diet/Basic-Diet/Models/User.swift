@@ -110,12 +110,7 @@ class UserLoginManager: ObservableObject {
                 self.state = .error // Save Error
                 return
             }
-            // Get 401 error will log out user)
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 401{
-                    logOut()
-                }
-            }
+
             let contents = String(data: data, encoding: .ascii)
             if contents?.isEmpty == false && contents?.contains("JWT:") == true {
                 DispatchQueue.main.async {
@@ -148,10 +143,6 @@ struct RegisterUser: Codable{
     var userBirthday: String = ""
 }
 
-struct JWT: Codable{
-    var JWT: String
-}
-
 
 class UserRegisterAPIManager: ObservableObject {
     
@@ -177,17 +168,17 @@ class UserRegisterAPIManager: ObservableObject {
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Value type
         
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in // Creates a task that retrieves the contents of a URL based on the specified URL request object, and calls a handler upon completion
             guard let data = data else { return }
             guard error == nil else {
-                self.state = .error
+                self.state = .error // Change the state to error
                 return
             }
             let contents = String(data: data, encoding: .ascii) // Encode the data in ASCII character set
             // Check Start with JWT:
             if contents?.isEmpty == false && contents?.contains("JWT:") == true {
                 DispatchQueue.main.async {
-                    // Get JWT
+                    // Get JWT and ID
                     let endRange = contents!.range(of: ";ID:")!
                     let startRange = contents!.range(of: "JWT:")!
                     UserDefaults.standard.set(contents![(startRange.upperBound..<endRange.lowerBound)], forKey: UserDefaultKeys.User.JWT) // Store JWT locally using UserDeafults
@@ -236,15 +227,15 @@ class UserUpdateAPIManager: ObservableObject {
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else { return }
-            guard error == nil else {
-                self.state = .error(error!)
-                return
-            }
             // Get 401 error will log out user)
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 401{
                     logOut()
                 }
+            }
+            guard error == nil else {
+                self.state = .error(error!)
+                return
             }
             let contents = String(data: data, encoding: .ascii) // Encode the data in ASCII character set
             // Check Succeed
@@ -252,6 +243,53 @@ class UserUpdateAPIManager: ObservableObject {
                 DispatchQueue.main.async {
                     self.authenticated = true
                     self.state = .loaded
+                }
+            }
+        }.resume()
+    }
+}
+
+class PasswordUpdateManager: ObservableObject{
+    @Published var state: State = .ready
+    @Published var authenticated = false
+    
+    enum State{
+        case ready
+        case loading
+        case loaded
+        case error(Error)
+        case incorrectInput
+    }
+    
+    func postAuth(oriPassword:String, newPassword:String){
+        let url = URL(string: Server.url + "User/updatePassword")!
+        
+        let body: [String: Any] = ["oriPassword": hashText(string: oriPassword), "newPassword": hashText(string: newPassword), "userID": UserDefaults.standard.integer(forKey: UserDefaultKeys.User.userID)]
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body) // Convert data into JSON
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" // HTTP Request Method
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Value type
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else { return }
+            guard error == nil else {
+                self.state = .error(error!)
+                return
+            }
+            let contents = String(data: data, encoding: .ascii) // Encode the data in ASCII character set
+            // Check Update Succeed
+            if contents?.isEmpty == false && contents?.contains("Succeed") == true {
+                DispatchQueue.main.async {
+                    self.authenticated = true
+                    self.state = .loaded
+                }
+            } else if contents?.isEmpty == false && contents?.contains("Incorrect Input") == true{ // Wrong ori password
+                DispatchQueue.main.async {
+                    self.authenticated = false
+                    self.state = .incorrectInput
                 }
             }
         }.resume()

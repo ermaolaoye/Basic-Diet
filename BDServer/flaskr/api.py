@@ -134,7 +134,7 @@ def add_food():
         # Insert into requests tables
         if userAuthority == 'citizen' or userAuthority == 'manager':
             content = 'Add Food Named:' + food['foodName']
-            sql = '''INSERT INTO Requests(userID, content, sqlCode) VALUES(%i, \"%s\", \'%s\')''' % (food['userID'], content, sqlCode)
+            sql = '''INSERT INTO Requests(userID, content, sqlCode) VALUES(%i, \"%s\", \"%s\")''' % (food['userID'], content, sqlCode)
             db.execute(sql)
             db.commit()
             return 'succeedRequested'

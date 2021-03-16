@@ -18,25 +18,30 @@ struct LoginView: View {
         VStack(alignment: .leading){
             if self.manager.authenticated == true{
                 Text(UserDefaults.standard.string(forKey: UserDefaultKeys.User.JWT)!)
-                Spacer()
                 Text(String(UserDefaults.standard.integer(forKey: UserDefaultKeys.User.userID)))
+                Text("Login Succeed")
+                    .bold()
+                    .foregroundColor(.red)
             } else {
                 if self.manager.state == .wrongPassword{
                     // Display warning if login failed
                     Text("Wrong Password or accounts")
                 }
+                //Email
                 Text("Email")
                 TextField("Enter ...", text: $userEmail)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .border(Color.gray)
                     .autocapitalization(.none)
                 
+                //Password
                 Text("Password")
                 TextField("Enter ...", text: $userPassword)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .border(Color.gray)
                     .autocapitalization(.none)
                 
+                //Login Button
                 Button(action:{
                     self.buttonClicked = true
                     self.manager.postAuth(user: LoginUser(userEmail: userEmail, password: hashText(string: userPassword)))

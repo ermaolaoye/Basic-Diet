@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct UpdateUserView: View {
+    init(user: User){
+        _userName = State(initialValue: user.userName)
+        _userGender = State(initialValue: user.userGender)
+        _userEmail = State(initialValue: user.userEmail)
+        _userWeightText = State(initialValue: String(user.userWeight))
+        _userHeightText = State(initialValue: String(user.userHeight))
+    }
     @State private var userName: String = ""
     @State private var userGender: String = "Male"
     @State private var userEmail: String = ""
@@ -31,8 +38,7 @@ struct UpdateUserView: View {
     var body: some View {
         VStack(alignment: .leading){
             if self.manager.authenticated {
-                Text(UserDefaults.standard.string(forKey: UserDefaultKeys.User.JWT)!) // Succeed if JWT is returned
-                Text(UserDefaults.standard.string(forKey: UserDefaultKeys.User.userID)!)
+                Text("Succeed")
             } else {
                 VStack(alignment: .leading){
                     // Username
@@ -132,10 +138,4 @@ struct UpdateUserView: View {
         .overlay(StatusOverlayUpdateUser(model: manager)) // Overlay view
     }
     
-}
-
-struct UpdateUserView_Previews: PreviewProvider {
-    static var previews: some View {
-        UpdateUserView()
-    }
 }

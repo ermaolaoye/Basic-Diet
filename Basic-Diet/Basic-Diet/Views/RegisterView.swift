@@ -27,17 +27,18 @@ struct RegisterView: View {
     
     @ObservedObject var manager = UserRegisterAPIManager() // Internet communication manager
     
-    @State private var isEmailValid: Bool = true
+    @State private var isEmailValid: Bool = true // Check Email Valid
     
-    @State private var buttonClicked: Bool = false
-    
-    @State private var userJWT = UserDefaults.standard.string(forKey: "JWT")
+    @State private var buttonClicked: Bool = false // Check Register Button Clicked
     
     var body: some View {
         VStack(alignment: .leading){
-            if self.manager.authenticated {
+            if self.manager.authenticated { // If register succeed
                 Text(UserDefaults.standard.string(forKey: UserDefaultKeys.User.JWT)!) // Succeed if JWT is returned
                 Text(UserDefaults.standard.string(forKey: UserDefaultKeys.User.userID)!)
+                Text("Register Succeed")
+                    .bold()
+                    .foregroundColor(.red)
             } else {
                 VStack(alignment: .leading){
                     // Username
@@ -90,7 +91,7 @@ struct RegisterView: View {
                         Text(self.genderOptions[$0])
                     }
                 }
-                .pickerStyle(SegmentedPickerStyle())
+                .pickerStyle(SegmentedPickerStyle()) // Picker Style
                 .onChange(of: selectedGenderIndex, perform: { value in
                     if selectedGenderIndex == 0{
                         userGender = "Male"
@@ -129,7 +130,7 @@ struct RegisterView: View {
                 .onChange(of: userBirthdayDate, perform: { value in
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "YYYY-MM-dd" // Set date format
-                    self.userBirthday = dateFormatter.string(from: userBirthdayDate)
+                    self.userBirthday = dateFormatter.string(from: userBirthdayDate) // Convert to String
                 })
                 
                 // Register button

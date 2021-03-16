@@ -28,9 +28,6 @@ struct UserDefaultKeys {
         static var isLogin: String = "isLogin"
         static var searchBarIsEditing: String = "searchBarIsEditing"
     }
-    struct SystemVariables{
-        static var searchBarOffset: CGFloat = -390.0
-    }
 }
 
 func logOut() -> Void{
@@ -65,30 +62,46 @@ func deleteUser() -> Void{
     }.resume() // Start the URL Session
 }
 // MARK: - Delete Food
-
-func deleteFood(food: Food) -> Void{
-    let url = URL(string: Server.url + "Food/del")!
+class DeleteFoodManager: ObservableObject{
     
-    let body: [String: Any] = ["userID": UserDefaults.standard.integer(forKey: UserDefaultKeys.User.userID), "userJWT": UserDefaults.standard.string(forKey: UserDefaultKeys.User.JWT), "foodID": food.id] // Json Data
+    @Published var authenticated = false // Whether authenticated or not
+    @Published var state: State = .ready
     
-    let finalBody = try! JSONSerialization.data(withJSONObject: body) // Convert the data to JSON
+    enum State{
+        case ready
+        case loading
+        case loaded
+        case requested
+        case error
+    }
     
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST" // Set HTTP Method
-    request.httpBody = finalBody
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Value type
-    
-    URLSession.shared.dataTask(with: request) { (data, response, error) in
-        guard let data = data else { return }
-        guard error == nil else { // Error Handling
-            return
-        }
-        // Check whether return value is correct or not
-        let contents = String(data: data, encoding: .utf8)
-        if contents!.isEmpty == false && contents!.contains("Succeed") == true {
-            DispatchQueue.main.async {
-                UserDefaults.standard.set(false, forKey: UserDefaultKeys.System.isLogin)
+    func deleteFood(food: Food) -> Void{
+        let url = URL(string: Server.url + "Food/del")!
+        
+        let body: [String: Any] = ["userID": UserDefaults.standard.integer(forKey: UserDefaultKeys.User.userID), "userJWT": UserDefaults.standard.string(forKey: UserDefaultKeys.User.JWT), "foodID": food.id] // Json Data
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body) // Convert the data to JSON
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" // Set HTTP Method
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Value type
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else { return }
+            guard error == nil else { // Error Handling
+                self.state = .error
+                return
             }
-        }
-    }.resume() // Start the URL Session
+            // Check whether return value is correct or not
+            let contents = String(data: data, encoding: .utf8)
+            if contents!.isEmpty == false && contents!.contains("Succeed") == true {
+                DispatchQueue.main.async {
+                    self.authenticated = true
+                    self.state = .loaded
+                }
+            }
+        }.resume() // Start the URL Session
+    }
+    
 }

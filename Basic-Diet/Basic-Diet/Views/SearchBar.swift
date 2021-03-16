@@ -91,12 +91,12 @@ struct SearchBar: View {
                         }
                         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                                     .onEnded({ value in
-                                        if value.translation.height > 0 {
+                                        if value.translation.height > 0 { // Swipe Down
                                             withAnimation(.default){
                                                 self.showUserView = true
                                             }
                                         }
-                                        if value.translation.height < 0 {
+                                        if value.translation.height < 0 { // Swipe Up
                                             withAnimation(.default){
                                                 self.showAddFoodView = true
                                             }

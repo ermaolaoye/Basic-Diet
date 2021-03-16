@@ -154,7 +154,8 @@ struct StatusOverlayUpdateFood: View{
             return AnyView(EmptyView())
         case .requested:
             return AnyView(
-                Text("Added to the request list")
+                Text("request")
+                    .offset(y: 30.0)
             )
         case let .error(error):
             if showErrorBox{
@@ -189,9 +190,58 @@ struct StatusOverlayAddFood: View{
             return AnyView(EmptyView())
         case .requested:
             return AnyView(
-                Text("Added to the request list")
+                Text("request")
+                    .offset(y: 30.0)
             )
         case let .error(error):
+            if showErrorBox{
+                return AnyView(
+                    VStack(spacing: 10){
+                        Text(error.localizedDescription).frame(maxWidth: 300) // Error Description
+                        Button("Close"){ // Retry button
+                            self.showErrorBox = false
+                        }
+                    }
+                    .padding()
+                    .background(Color.yellow)
+                )
+            } else {
+                return AnyView(EmptyView())
+            }
+        }
+    }
+}
+
+// MARK: - Update Password
+struct StatusOverlayUpdatePassword: View{
+    @ObservedObject var manager: PasswordUpdateManager
+    @State var showErrorBox: Bool = true
+    @State var showIncorrectBox: Bool = true
+    var body: some View{
+        switch manager.state{
+        case .ready:
+            return AnyView(EmptyView())
+        case .loading:
+            return AnyView(EmptyView())
+        case .loaded:
+            return AnyView(EmptyView())
+        case .incorrectInput: // Show Incorrect Box
+            if showIncorrectBox{
+            return AnyView(
+                VStack(spacing:10){
+                    Text("Incorrect original password")
+                        .bold()
+                        .frame(maxWidth: 300)
+                        .foregroundColor(.red)
+                    Button("Close"){
+                        self.showIncorrectBox = false
+                    }
+                }
+            )
+            } else {
+                return AnyView(EmptyView())
+            }
+        case let .error(error): // Show Error Box
             if showErrorBox{
                 return AnyView(
                     VStack(spacing: 10){

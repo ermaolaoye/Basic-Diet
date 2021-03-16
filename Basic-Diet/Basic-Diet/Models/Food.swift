@@ -21,6 +21,7 @@ struct Food: Codable{
     var id: Int
     var calories, carbohydrate, fat, protein, cholesterol, sodium, dietaryFiber, vitaminA, carotene, vitaminE, vitaminB1, vitaminB2, vitaminC, niacin, phosphorus, potassium, magnesium, calcium, iron, zinc, selenium, copper, manganese: Float
     var imageID, type: Int
+    var addUser: Int
     
     // Type 0:Meat, 1:Staple, 2:Desert, 3:Beverage
 }

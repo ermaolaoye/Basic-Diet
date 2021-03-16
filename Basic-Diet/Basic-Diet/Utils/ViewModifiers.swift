@@ -8,63 +8,32 @@
 
 import SwiftUI
 
-struct HideRowSeparatorModifier: ViewModifier {
-    static let defaultListRowHeight: CGFloat = 44
-    var insets: EdgeInsets
-    var background: Color
-    
-    init(insets: EdgeInsets, background: Color) {
-        self.insets = insets
-        var alpha: CGFloat = 0
-        UIColor(background).getWhite(nil, alpha: &alpha)
-        assert(alpha == 1, "Setting background to a non-opaque color will result in separators remaining visible.")
-        self.background = background
-    }
-    
-    func body(content: Content) -> some View {
-        content
-            .padding(insets)
-            .frame(
-                minWidth: 0, maxWidth: .infinity,
-                minHeight: Self.defaultListRowHeight,
-                alignment: .leading
-            )
-            .listRowInsets(EdgeInsets())
-            .background(background)
-    }
-}
-
-extension EdgeInsets {
-    static let defaultListRowInsets = Self(top: 0, leading: 16, bottom: 0, trailing: 16)
-}
-
-extension View {
-    func hideRowSeparator(insets: EdgeInsets = .defaultListRowInsets, background: Color = .white) -> some View {
-        modifier(HideRowSeparatorModifier(insets: insets, background: background))
-    }
-}
-
-extension UINavigationController: UIGestureRecognizerDelegate { // Add Swipe Gesture back when customizing navigation bar
+// Add Swipe Gesture back when customizing navigation bar
+extension UINavigationController: UIGestureRecognizerDelegate {
     override open func viewDidLoad() {
         super.viewDidLoad()
-        interactivePopGestureRecognizer?.delegate = self
+        interactivePopGestureRecognizer?.delegate = self // The delegate of the gesture recognizer.
     }
 
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool { // Asks the delegate if a gesture recognizer should begin interpreting touches.
         return viewControllers.count > 1
     }
 }
 
+// Snap shot of a view
 extension View {
-  @ViewBuilder
-  func `if`<Transform: View>(
-    _ condition: Bool,
-    transform: (Self) -> Transform
-  ) -> some View {
-    if condition {
-      transform(self)
-    } else {
-      self
+    func snapshot() -> UIImage {
+        let controller = UIHostingController(rootView: self) // Initialize view controller
+        let view = controller.view
+
+        let targetSize = controller.view.intrinsicContentSize // Set target size
+        view?.bounds = CGRect(origin: .zero, size: targetSize) // get bounds of the view
+        view?.backgroundColor = .clear
+
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+
+        return renderer.image { _ in // Render and output as UIImage
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        }
     }
-  }
 }

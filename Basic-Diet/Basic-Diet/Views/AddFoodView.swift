@@ -89,7 +89,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: caloriesText, perform: { value in
-                                    self.calories = Float(caloriesText) ?? 0 // Convert String to Integer
+                                    self.calories = Float(caloriesText) ?? 0 // Convert String to Float
                                 })
                             // Carbohydrate
                             Text("Carbohydrate")
@@ -99,7 +99,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: carbohydrateText, perform: { value in
-                                    self.carbohydrate = Float(carbohydrateText) ?? 0 // Convert String to Integer
+                                    self.carbohydrate = Float(carbohydrateText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Fat")
@@ -109,7 +109,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: fatText, perform: { value in
-                                    self.fat = Float(fatText) ?? 0 // Convert String to Integer
+                                    self.fat = Float(fatText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Protein")
@@ -119,7 +119,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: proteinText, perform: { value in
-                                    self.protein = Float(proteinText) ?? 0 // Convert String to Integer
+                                    self.protein = Float(proteinText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Sodium")
@@ -129,7 +129,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: sodiumText, perform: { value in
-                                    self.sodium = Float(sodiumText) ?? 0 // Convert String to Integer
+                                    self.sodium = Float(sodiumText) ?? 0 // Convert String to Float
                                 })
                         }
                         Text("Niacin")
@@ -139,7 +139,7 @@ struct AddFoodView: View {
                             .autocapitalization(.none)
                             .keyboardType(.numberPad) // Only allows using number pad to input value
                             .onChange(of: niacinText, perform: { value in
-                                self.niacin = Float(niacinText) ?? 0 // Convert String to Integer
+                                self.niacin = Float(niacinText) ?? 0 // Convert String to Float
                             })
                         
                     }
@@ -152,7 +152,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: cholesterolText, perform: { value in
-                                    self.cholesterol = Float(cholesterolText) ?? 0 // Convert String to Integer
+                                    self.cholesterol = Float(cholesterolText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Dietary Fiber")
@@ -162,7 +162,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: dietaryFiberText, perform: { value in
-                                    self.dietaryFiber = Float(dietaryFiberText) ?? 0 // Convert String to Integer
+                                    self.dietaryFiber = Float(dietaryFiberText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("VitaminA")
@@ -172,7 +172,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: vitaminAText, perform: { value in
-                                    self.vitaminA = Float(vitaminAText) ?? 0 // Convert String to Integer
+                                    self.vitaminA = Float(vitaminAText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Carotene")
@@ -182,7 +182,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: caroteneText, perform: { value in
-                                    self.carotene = Float(caroteneText) ?? 0 // Convert String to Integer
+                                    self.carotene = Float(caroteneText) ?? 0 // Convert String to Float
                                 })
                         }
                         VStack(alignment:.leading){
@@ -194,7 +194,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: vitaminEText, perform: { value in
-                                    self.vitaminE = Float(vitaminEText) ?? 0 // Convert String to Integer
+                                    self.vitaminE = Float(vitaminEText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("vitaminB1")
@@ -204,7 +204,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: vitaminB1Text, perform: { value in
-                                    self.vitaminB1 = Float(vitaminB1Text) ?? 0 // Convert String to Integer
+                                    self.vitaminB1 = Float(vitaminB1Text) ?? 0 // Convert String to Float
                                 })
                             
                             Text("vitaminB2")
@@ -214,7 +214,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: vitaminB2Text, perform: { value in
-                                    self.vitaminB2 = Float(vitaminB2Text) ?? 0 // Convert String to Integer
+                                    self.vitaminB2 = Float(vitaminB2Text) ?? 0 // Convert String to Float
                                 })
                             
                             Text("vitaminC")
@@ -224,7 +224,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: vitaminCText, perform: { value in
-                                    self.vitaminC = Float(vitaminCText) ?? 0 // Convert String to Integer
+                                    self.vitaminC = Float(vitaminCText) ?? 0 // Convert String to Float
                                 })
                         }
                         VStack(alignment:.leading){
@@ -235,7 +235,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: niacinText, perform: { value in
-                                    self.niacin = Float(niacinText) ?? 0 // Convert String to Integer
+                                    self.niacin = Float(niacinText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Phosphorus")
@@ -245,7 +245,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: phosphorusText, perform: { value in
-                                    self.phosphorus = Float(phosphorusText) ?? 0 // Convert String to Integer
+                                    self.phosphorus = Float(phosphorusText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Magnesium")
@@ -255,7 +255,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: magnesiumText, perform: { value in
-                                    self.magnesium = Float(magnesiumText) ?? 0 // Convert String to Integer
+                                    self.magnesium = Float(magnesiumText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Calcium")
@@ -265,7 +265,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: calciumText, perform: { value in
-                                    self.calcium = Float(calciumText) ?? 0 // Convert String to Integer
+                                    self.calcium = Float(calciumText) ?? 0 // Convert String to Float
                                 })
                         }
                         VStack(alignment:.leading){
@@ -276,7 +276,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: ironText, perform: { value in
-                                    self.iron = Float(ironText) ?? 0 // Convert String to Integer
+                                    self.iron = Float(ironText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Zinc")
@@ -286,7 +286,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: zincText, perform: { value in
-                                    self.zinc = Float(zincText) ?? 0 // Convert String to Integer
+                                    self.zinc = Float(zincText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Selenium")
@@ -296,7 +296,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: seleniumText, perform: { value in
-                                    self.selenium = Float(seleniumText) ?? 0 // Convert String to Integer
+                                    self.selenium = Float(seleniumText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Copper")
@@ -306,7 +306,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: copperText, perform: { value in
-                                    self.copper = Float(copperText) ?? 0 // Convert String to Integer
+                                    self.copper = Float(copperText) ?? 0 // Convert String to Float
                                 })
                             
                             Text("Manganese")
@@ -316,7 +316,7 @@ struct AddFoodView: View {
                                 .autocapitalization(.none)
                                 .keyboardType(.numberPad) // Only allows using number pad to input value
                                 .onChange(of: manganeseText, perform: { value in
-                                    self.manganese = Float(manganeseText) ?? 0 // Convert String to Integer
+                                    self.manganese = Float(manganeseText) ?? 0 // Convert String to Float
                                 })
                         }
                         Text("Type")
@@ -343,7 +343,7 @@ struct AddFoodView: View {
                     Button(action:{
                         self.manager.state = .loading
                         self.buttonClicked = true
-                        self.manager.postAuth(food: AddFood(foodNameCHN: foodNameCHN, calories: calories, nutriSelect: Food(foodNameCHN: self.foodNameCHN, id: -1, calories: self.calories, carbohydrate: self.carbohydrate, fat: self.fat, protein: self.protein, cholesterol: self.cholesterol, sodium: self.sodium, dietaryFiber: self.dietaryFiber, vitaminA: self.vitaminA, carotene: self.carotene, vitaminE: self.vitaminE, vitaminB1: self.vitaminB1, vitaminB2: self.vitaminB2, vitaminC: self.vitaminC, niacin: self.niacin, phosphorus: self.phosphorus, potassium: self.potassium, magnesium: self.magnesium, calcium: self.calcium, iron: self.iron, zinc: self.zinc, selenium: self.selenium, copper: self.copper, manganese: self.manganese, imageID: -1, type: self.type).descriptionNutriSelect , nutriVal: Food(foodNameCHN: self.foodNameCHN, id: -1, calories: self.calories, carbohydrate: self.carbohydrate, fat: self.fat, protein: self.protein, cholesterol: self.cholesterol, sodium: self.sodium, dietaryFiber: self.dietaryFiber, vitaminA: self.vitaminA, carotene: self.carotene, vitaminE: self.vitaminE, vitaminB1: self.vitaminB1, vitaminB2: self.vitaminB2, vitaminC: self.vitaminC, niacin: self.niacin, phosphorus: self.phosphorus, potassium: self.potassium, magnesium: self.magnesium, calcium: self.calcium, iron: self.iron, zinc: self.zinc, selenium: self.selenium, copper: self.copper, manganese: self.manganese, imageID: -1, type: self.type).descriptionNutriVal))
+                        self.manager.postAuth(food: AddFood(foodNameCHN: foodNameCHN, calories: calories, nutriSelect: Food(foodNameCHN: self.foodNameCHN, id: -1, calories: self.calories, carbohydrate: self.carbohydrate, fat: self.fat, protein: self.protein, cholesterol: self.cholesterol, sodium: self.sodium, dietaryFiber: self.dietaryFiber, vitaminA: self.vitaminA, carotene: self.carotene, vitaminE: self.vitaminE, vitaminB1: self.vitaminB1, vitaminB2: self.vitaminB2, vitaminC: self.vitaminC, niacin: self.niacin, phosphorus: self.phosphorus, potassium: self.potassium, magnesium: self.magnesium, calcium: self.calcium, iron: self.iron, zinc: self.zinc, selenium: self.selenium, copper: self.copper, manganese: self.manganese, imageID: -1, type: self.type, addUser: UserDefaults.standard.integer(forKey: UserDefaultKeys.User.userID)).descriptionNutriSelect , nutriVal: Food(foodNameCHN: self.foodNameCHN, id: -1, calories: self.calories, carbohydrate: self.carbohydrate, fat: self.fat, protein: self.protein, cholesterol: self.cholesterol, sodium: self.sodium, dietaryFiber: self.dietaryFiber, vitaminA: self.vitaminA, carotene: self.carotene, vitaminE: self.vitaminE, vitaminB1: self.vitaminB1, vitaminB2: self.vitaminB2, vitaminC: self.vitaminC, niacin: self.niacin, phosphorus: self.phosphorus, potassium: self.potassium, magnesium: self.magnesium, calcium: self.calcium, iron: self.iron, zinc: self.zinc, selenium: self.selenium, copper: self.copper, manganese: self.manganese, imageID: -1, type: self.type, addUser: UserDefaults.standard.integer(forKey: UserDefaultKeys.User.userID)).descriptionNutriVal))
                     }){
                         HStack{
                             Spacer()

@@ -13,8 +13,12 @@ struct UserView: View {
         VStack {
             Spacer()
             List{
-                NavigationLink(destination: UpdateUserView()){
+                NavigationLink(destination: UpdateUserView(user:manager.user[0])){
                     Text("Edit User Profile")
+                        .foregroundColor(.blue)
+                }
+                NavigationLink(destination:UpdatePasswordView()){
+                    Text("Change Password")
                         .foregroundColor(.blue)
                 }
                 // UserName
@@ -23,15 +27,18 @@ struct UserView: View {
                     Spacer()
                     Text(manager.user[0].userName)
                 }
-                HStack{
-                    Text("UserWeight")
-                    Spacer()
-                    Text(String(manager.user[0].userWeight))
-                }
-                HStack{
-                    Text("UserHeight")
-                    Spacer()
-                    Text(String(manager.user[0].userHeight))
+                VStack{
+                    HStack{
+                        Text("UserWeight")
+                        Spacer()
+                        Text(String(manager.user[0].userWeight))
+                    }
+                    .padding(.bottom)
+                    HStack{
+                        Text("UserHeight")
+                        Spacer()
+                        Text(String(manager.user[0].userHeight))
+                    }
                 }
                 HStack{
                     Text("Recommended Calories")
