@@ -7,10 +7,6 @@ My Open Source A-Level Project
 
 
 **Report Documents of this Project**:
+-[The Notion Page of this Project](https://www.notion.so/ermaolaoye/Basic-Diet-e547e1c181ad4fa8bbd3cabf3a2f3b33)
 
-- 📐[The Analysis Document](https://github.com/Ermaolaoye233/Basic-Diet/blob/main/Documents/NotionDocumentsBackup/Analysis.md)
-
-- 👨‍🎨[The Design Document](https://github.com/Ermaolaoye233/Basic-Diet/blob/main/Documents/NotionDocumentsBackup/Design.md)
-
-- [The Iteration Documents](https://github.com/Ermaolaoye233/Basic-Diet/blob/main/Documents/NotionDocumentsBackup/Iteration%20S1.md)
 
