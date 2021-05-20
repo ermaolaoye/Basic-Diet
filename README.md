@@ -1,10 +1,9 @@
 # Basic-Diet
-My A-Level Project
+My Open Source A-Level Project
 
 - BDServer is the server backend code for this project, using the FLASK web framework
 - Basic-Diet is the client frontend code for this project, using SwiftUI APIs
 - Documents stores documents for this project.
-
 
 
 **Report Documents of this Project**:
